@@ -1,0 +1,39 @@
+﻿// Modest PHA model of a thermostat with failure [HHHK13]
+// prohver thermostat.modest -E "TIME_BOUND=5" -T 2 --no-cheap-contain-return-others --no-partition-check-time-relevance-during
+bool error;
+clock c;
+var T = any(x, 9 <= x && x <= 10); // temperature
+
+const real TIME_BOUND;
+property P_Unsafe = Pmax(<>[T<=TIME_BOUND] error);
+
+process Heat()
+{
+	invariant(der(T) == 2 && T <= 10 && c <= 3)
+	alt {
+	::	when(c >= 2) tau {= c = 0 =}; Check()
+	::	when(T >= 9) tau; Cool()
+	}
+}
+
+process Cool()
+{
+	invariant(der(T) == -T && T >= 5)
+	when(T <= 6) tau {= c = 0 =}; Heat()
+}
+
+process Check()
+{
+	invariant(der(T) == -T/2 && c <= 1)
+	when(c >= 0.5) tau palt {
+	:95: {= c = 0 =}; Heat()
+	: 5: {= error = true =}; Error()
+	}
+}
+
+process Error()
+{
+	invariant(der(T) == 0) stop
+}
+
+Heat()

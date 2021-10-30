@@ -1,0 +1,37 @@
+// Linked lists:
+datatype intlist = { int hd, intlist option tl };
+datatype intalist = { int[] hd, intalist option tl }; // list of arrays of integers
+
+// Calculate length of list:
+function int len(intlist option ls) = if ls == none then 0 else 1 + len(ls!.tl); // "!" accesses the value of a non-empty option (causes an error if the option is empty)
+
+// Create a list of numbers n to m:
+function intlist option ntom(int n, int m) = if n > m then none else some(intlist { hd: n, tl: ntom(n + 1, m) });
+
+// Lists for testing:
+intlist option ls = none;
+intalist als = intalist { hd: [0], tl: some(intalist { hd: [2, 5] }) }; // can leave out default values in datatype constructors (none is the default value for options, 0 for ints, etc.)
+intlist option[] lss = [ none, some(intlist { hd: 1 }) ];
+
+// Array of arrays:
+int[][] darray = [ array(i, 2, i + 1), [ 2, 3 ] ]; // the first sub-array is created with an array constructor (parameters: variable, length, value expression), the second with an array value
+
+// Some properties:
+property PrL = Pmax(<> (len(ls) != 0));
+property PrT = Pmax(<> (ls != none && ls! == intlist { hd: 0, tl: none }));
+property Pr3 = Pmax(<> (len(ls) >= 4 && ls!.tl!.tl!.hd == 3));
+property Pr4 = Pmax(<> (len(ls) >= 4 && ls!.tl!.tl!.hd == 4));
+property Pr5 = Pmax(<> (len(ls) >= 4 && ls!.tl!.tl!.hd == 5));
+property PrA = Pmax(<> (als.tl!.hd[1] == 5));
+property PrS1 = Pmax(<> (lss[1] != none && lss[1]!.tl != none && lss[1]!.tl!.hd == 2));
+property PrS2 = Pmax(<> (lss[0] != none && lss[0]!.hd == 3));
+property PrS12 = Pmax(<> (lss[1] != none && lss[1]!.tl != none && lss[1]!.tl!.hd == 2 && lss[0] != none && lss[0]!.hd == 3));
+property PrDA01 = Pmax(<> (darray[0][1] == 2));
+property PrDA10 = Pmax(<> (darray[1][0] == 5));
+property PrDAX = Pmax(<> (darray[0][1] == 2 && darray[1][0] == 5));
+
+// Testing:
+{= ls = some(intlist { hd: 0, tl: none }) =};
+{= ls!.tl = ntom(3, 5) =};
+{= lss[1]!.tl = some(intlist { hd: 2 }) =};
+{= lss[1]!.tl = none, lss[0] = some(intlist { hd: 3 }), darray[0] = [ 0, 0 ], darray[1][0] = 5 =}

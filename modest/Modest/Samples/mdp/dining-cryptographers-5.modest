@@ -1,0 +1,78 @@
+﻿// Modest MDP model of the randomised dining cryptographers PRISM case study
+// http://www.prismmodelchecker.org/casestudies/phil.php
+// mcsta dining-cryptographers-5.modest
+// modes dining-cryptographers-5.modest -M MDP -R Uniform
+action flip, end;
+action show_heads, show_tails, see_heads, see_tails;
+action show_heads1, show_tails1;
+action show_heads2, show_tails2;
+action show_heads3, show_tails3;
+action show_heads4, show_tails4;
+action show_heads5, show_tails5;
+
+const int N = 5;
+
+int(0..N) pay;
+int(0..N) agree_count;
+bool done;
+
+const int NProp = N;
+property Termination = Pmin(<> done) == 1;
+property Correctness = Pmin(<> (done && (agree_count % 2 == NProp % 2 && pay == 0 || agree_count % 2 != NProp % 2 && pay != 0))) == 1;
+
+process Cryptographer(int(1..N) id)
+{
+	bool heads;
+	bool agree;
+	
+	process Show()
+	{
+		alt {
+		::	when( heads) show_heads
+		::	when(!heads) show_tails
+		}
+	}
+		
+	process See()
+	{
+		alt {
+		::	see_heads {= agree =  heads =}
+		::	see_tails {= agree = !heads =}
+		}
+	}
+
+	flip palt { :1: {= heads = true =} :1: {= heads = false =} };
+	par {
+	::	Show()
+	::	See()
+	};
+	tau {= agree_count = min(N, agree_count + (agree && pay != id || !agree && pay == id ? 1 : 0)) =}; // min in update needed for PRISM
+	end
+}
+
+process Payment()
+{
+	// Choose a scenario probabilistically (for simulation)
+	// or nondeterministically (for model checking)
+	flip {= pay = DiscreteUniform(0, N) =};
+	end {= done = true =}
+}
+
+par {
+::	Payment()
+::	relabel { show_heads,  show_tails,  see_heads,   see_tails   }
+	by      { show_heads1, show_tails1, show_heads5, show_tails5 }
+	Cryptographer(1)
+::	relabel { show_heads,  show_tails,  see_heads,   see_tails   }
+	by      { show_heads2, show_tails2, show_heads1, show_tails1 }
+	Cryptographer(2)
+::	relabel { show_heads,  show_tails,  see_heads,   see_tails   }
+	by      { show_heads3, show_tails3, show_heads2, show_tails2 }
+	Cryptographer(3)
+::	relabel { show_heads,  show_tails,  see_heads,   see_tails   }
+	by      { show_heads4, show_tails4, show_heads3, show_tails3 }
+	Cryptographer(4)
+::	relabel { show_heads,  show_tails,  see_heads,   see_tails   }
+	by      { show_heads5, show_tails5, show_heads4, show_tails4 }
+	Cryptographer(5)
+}

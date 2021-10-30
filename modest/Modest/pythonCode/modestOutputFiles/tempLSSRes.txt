@@ -1,0 +1,20 @@
+﻿Peak memory usage: 3986 MB
+Analysis results for latticeForSMC.modest
+Experiment didInit=111, vidInit=38
+Status:          Finished
+Simulation time: 62470.7 s
+
++ Property 1
+  Estimated max. probability: 0.10222461428058845
+  Runs used (best scheduler): 27870
+  Total runs used:            108334
+  Schedulers sampled:         1667
+  Best scheduler:             1999321341
+  Run type:                   MDP
+  Status:                     Finished
+
+  + Error bounds
+    Scheduler sampling: The result is a lower bound for the true max. probability.
+    Statement:          Adaptive: P(error > ε) < δ
+    ε:                  0.005
+    δ:                  0.050000000000000044

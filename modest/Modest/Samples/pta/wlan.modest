@@ -1,0 +1,211 @@
+﻿// Modest model of IEEE 802.11 Wireless LAN [HH09]
+// mcsta wlan.modest
+// modes.exe wlan.modest -S ASAP -R Uniform -W 0.1
+action send, send1, send2;
+action finish, finish1, finish2;
+action success, success1, success2;
+action bck, bck1, bck2;
+action coll1, coll2;
+
+const int BCMAX = 2;
+
+// Parameters for the physical layer
+const int ASLOT = 1;
+const int DIFS = 3; // due to scaling can be non-deterministically either 2 or 3
+const int VULN = 1; // due to scaling can be non-deterministically either 0 or 1
+const int TTMAX = 315; // scaling up
+const int TTMIN = 4; // scaling down
+const int ACK_TO = 6; 
+const int ACK = 4; // due to scaling can be non-deterministically either 3 or 4
+const int SIFS = 1; // due to scaling can be non-deterministically either 0 or 1
+
+// packet status
+// 0: nothing sent
+// 1: sending correctly
+// 2: sending garbled
+int(0..2) c1; // first station's packet
+int(0..2) c2; // second station's packet
+
+// Properties
+bool success1_seen, success2_seen, bck1_seen, bck2_seen;
+
+// Probabilistic reachability
+const int K = 2;
+// "with probability 1, eventually both stations have sent their packet correctly"
+property P_1 = Pmin(<> (success1_seen && success2_seen)) == 1;
+// "the maximum probability that either station's backoff counter reaches K"
+property P_max = Pmax(<> (bck1_seen || bck2_seen));
+
+// Time-bounded probabilistic reachability
+const int DEADLINE = 1260;
+// "the minimum probability of both stations correctly
+//  delivering their packets within time DEADLINE"
+property D_and = Pmin(<>[T<=DEADLINE] (success1_seen && success2_seen));
+// "the minimum probability of either station correctly
+//  delivering its packet within time DEADLINE"
+property D_or = Pmin(<>[T<=DEADLINE] (success1_seen || success2_seen));
+// "the minimum probability of station 1 correctly
+//  delivering its packet within time DEADLINE"
+property D_1 = Pmin(<>[T<=DEADLINE] success1_seen);
+
+// Expected reachability
+// "the maximum expected time until both stations correctly deliver their packets"
+property E_and = Xmax(T, success1_seen && success2_seen);
+// "the maximum expected time until either station correctly delivers its packet"
+property E_or = Xmax(T, success1_seen || success2_seen);
+// "the maximum expected time until station 1 correctly delivers its packet"
+property E_1 = Xmax(T, success1_seen);
+
+process Channel()
+{
+   alt {
+   :: finish1 {= c1 = 0 =}
+   :: finish2 {= c2 = 0 =}
+   :: send1 {= c1 = min(c2 + 1, 2), c2 = min(c2 + c2, 2) =}
+   :: send2 {= c1 = min(c1 + c1, 2), c2 = min(c1 + 1, 2) =}
+   };
+   Channel()
+}
+
+process Sender(int(1..2) id)
+{
+   clock x;
+   int(0..2) status;
+   int(0..BCMAX) bc;
+   int(0..(int)pow(2, BCMAX + 4) - 1) backoff;
+   
+   process SENSE()
+   {
+      constrain(x <= DIFS)
+      alt {
+      :: when(x >= DIFS - 1) {= x = 0 =};
+         VULN()
+      :: when(c1 + c2 > 0) urgent(c1 + c2 > 0) {= x = 0 =};
+         WAIT_FREE()
+      }
+   }
+   
+   process VULN()
+   {
+      constrain(x <= VULN)
+      when(x >= VULN - 1) send {= x = 0 =};
+      TRANSMIT()
+   }
+   
+   process TRANSMIT()
+   {
+      constrain(x <= TTMAX)
+      alt {
+      :: when(id == 1 && x >= TTMIN) finish {= x = 0, status = c1 =};
+         TEST_CHAN()
+      :: when(id == 2 && x >= TTMIN) finish {= x = 0, status = c2 =};
+         TEST_CHAN()
+      }
+   }
+   
+   process TEST_CHAN()
+   {
+      urgent
+      alt {
+      :: when(c1 + c2 > 0) tau;
+         WAIT_FREE()
+      :: when(c1 + c2 == 0 && status == 2) tau;
+         NO_ACK()
+      :: when(c1 + c2 == 0 && status == 1) tau;
+         SEND_ACK()
+      }
+   }
+   
+   process SEND_ACK()
+   {
+      constrain(x <= SIFS)
+      when(x >= SIFS - 1) send {= x = 0 =};
+      ACK()
+   }
+   
+   process ACK()
+   {
+      constrain(x <= ACK)
+      when(x >= ACK - 1) finish {= x = 0 =};
+      constrain(x <= 0) success // DONE
+   }
+   
+   process NO_ACK()
+   {
+      constrain(x <= ACK_TO)
+      when(x >= ACK_TO) {= x = 0 =};
+      WAIT_DIFS()
+   }
+      
+   process WAIT_FREE()
+   {
+      when(c1 + c2 == 0) urgent(c1 + c2 == 0) {= x = 0 =};
+      WAIT_DIFS()
+   }
+
+   process WAIT_DIFS()
+   {
+      constrain(x <= DIFS)
+      alt {
+      :: when(x >= DIFS - 1)
+         {= backoff = DiscreteUniform(0, (int)pow(2, bc + 4) - 1),
+            bc = min(bc + 1, BCMAX), x = 0 =};
+         urgent alt { :: when(bc == K) bck :: when(bc != K) tau };
+         BACKOFF()
+      :: when(c1 + c2 > 0) urgent(c1 + c2 > 0) {= x = 0 =};
+         WAIT_FREE()
+      }
+   }
+   
+   process BACKOFF()
+   {
+      constrain(x <= ASLOT)
+      alt {
+      :: when(x >= ASLOT && backoff == 0) {= x = 0 =};
+         VULN()
+      :: when(x >= ASLOT && backoff > 0) {= backoff = backoff - 1, x = 0 =};
+         BACKOFF()
+      :: when(c1 + c2 > 0) urgent(c1 + c2 > 0) {= x = 0 =};
+         WAIT_FREEII()
+      }
+   }
+   
+   process WAIT_FREEII()
+   {
+      when(c1 + c2 == 0) urgent(c1 + c2 == 0) {= x = 0 =};
+      WAIT_DIFSII()
+   }
+   
+   process WAIT_DIFSII()
+   {
+      constrain(x <= DIFS)
+      alt {
+      :: when(x >= DIFS - 1) {= x = 0 =};
+         BACKOFF()
+      :: when(c1 + c2 > 0) urgent(c1 + c2 > 0) tau;
+         WAIT_FREEII()
+      }
+   }
+   
+   SENSE()
+}
+
+process Observer()
+{
+   alt {
+   :: success1 {= success1_seen = true =}
+   :: success2 {= success2_seen = true =}
+   :: bck1 {= bck1_seen = true =}
+   :: bck2 {= bck2_seen = true =}
+   };
+   Observer()
+}
+
+par {
+:: Channel()
+:: relabel {send, finish, success, bck}
+   by {send1, finish1, success1, bck1} Sender(1)
+:: relabel {send, finish, success, bck}
+   by {send2, finish2, success2, bck2} Sender(2)
+:: Observer()
+}

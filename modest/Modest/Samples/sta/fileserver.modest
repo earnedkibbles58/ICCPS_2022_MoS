@@ -1,0 +1,46 @@
+﻿// Modest STA model of a file server with exponentially distributed arrivals, uniformly distributed file size, fixed probability for file to be in archive, and nondeterministic time for archive retrieval [HHH14]
+// mcsta fileserver.modest -E "TIME_BOUND=5"
+// modes fileserver.modest -E "TIME_BOUND=5" -S ASAP -R Uniform -N 10000
+const int C = 5; // queue size
+const real TIME_BOUND;
+
+const real LAMBDA = 1 / 8;     // request arrival rate
+const real ARCH_PROB = 1 / 50; // fraction of files in archive
+const real FILE_MIN = 1;       // min. time to send regular file
+const real FILE_MAX = 3;       // max. time to send regular file
+const real ARCH_MIN = 30;      // min. time to send archived file
+const real ARCH_MAX = 40;      // max. time to send archived file
+
+int(0..C) queue;
+
+property QueueOverflowProbMax = Pmax(<>[T<=TIME_BOUND] (queue == C));
+property QueueOverflowProbMin = Pmin(<>[T<=TIME_BOUND] (queue == C));
+property QueueOverflowTimeMin = Xmin(T, queue == C);
+property QueueOverflowTimeMax = Xmax(T, queue == C);
+
+process Arrivals()
+{
+   clock c; real x;
+   do
+   {
+      when urgent(c >= x && queue < C) {= queue++, c = 0, x = Exp(LAMBDA) =}
+   }
+}
+
+process Server()
+{
+   clock c; real x;
+   when urgent(queue > 0) palt {
+   :  ARCH_PROB: {= queue--, c = 0 =};
+                 when(c >= ARCH_MIN) urgent(c >= ARCH_MAX) {= c = 0, x = Uni(FILE_MIN, FILE_MAX) =}
+   :1-ARCH_PROB: {= queue--, c = 0, x = Uni(FILE_MIN, FILE_MAX) =}
+   };
+   when urgent(c >= x) tau {= c = 0, x = 0 =};
+   Server()
+}
+
+par {
+:: Arrivals()
+:: Server()
+:: urgent {= queue = DiscreteUniform(0, floor(C/2)) =}
+}

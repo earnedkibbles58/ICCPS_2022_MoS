@@ -1,0 +1,20 @@
+﻿Peak memory usage: 83 MB
+Analysis results for noRounding.modest
+Experiment wlidInit1=23, wlidInit2=23, initContAction1=0, initContAction2=0
+Status:          Finished
+Simulation time: 65.6 s
+
++ Property 1
+  Estimated max. probability: 0.4302842163355408
+  Runs used (best scheduler): 72480
+  Total runs used:            125264
+  Schedulers sampled:         5000
+  Best scheduler:             1873793409
+  Run type:                   MDP
+  Status:                     Finished
+
+  + Error bounds
+    Scheduler sampling: The result is a lower bound for the true max. probability.
+    Statement:          Adaptive: P(error > ε) < δ
+    ε:                  0.005
+    δ:                  0.050000000000000044

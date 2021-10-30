@@ -1,0 +1,5 @@
+
+This doc describes how to convert JANI files into the modest format and use modest to run LSS
+
+navigate to teh pythonCode folder and run
+python3 convertJANIToModest.py

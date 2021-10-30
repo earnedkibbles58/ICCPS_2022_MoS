@@ -1,0 +1,87 @@
+﻿// Modest PTA model for the IEEE 802.3 CSMA/CD protocol [HH09]
+// mcsta csmacd.modest
+// modes csmacd.modest -R Uniform -S ASAP -W 0.1
+action send, send1, send2;
+action end, end1, end2;
+action busy, busy1, busy2;
+action cd;
+
+const int RED = 2; // reduction factor
+const int PD = (int)(26 / RED); // signal propagation delay
+const int TD = (int)(808 / RED); // packet transmission delay
+const int ST = 2 * PD; // backoff time slot length
+const int BCMAX = 1; // 1 or 2
+
+bool end1_seen, end2_seen;
+
+// Probabilistic reachability property:
+// "with probability 1, eventually both stations send their packet correctly"
+property P_1 = Pmin(<> (end1_seen && end2_seen)) == 1;
+
+// Probabilistic time-bounded reachability
+// "the minimum/maximum probability of both stations correctly delivering their packets by the deadline D"
+const int D = (int)(1800 / RED);
+property D_max = Pmax(<>[T<=D] (end1_seen && end2_seen));
+property D_min = Pmin(<>[T<=D] (end1_seen && end2_seen));
+
+// Expected reachability
+// "the minimum/maximum expected time until both stations correctly deliver their packets"
+property E_min = Xmin(T, end1_seen && end2_seen);
+property E_max = Xmax(T, end1_seen && end2_seen);
+
+process Medium()
+{
+   clock c;
+
+   alt { :: send1 {= c = 0 =} :: send2 {= c = 0 =} };
+   do {
+   :: alt { :: end1 :: end2 }; // transfer finished
+      urgent break
+   :: when(c <= PD)
+      alt { :: send1 {= c = 0 =} :: send2 {= c = 0 =} }; // collision
+      constrain(c <= PD) cd {= c = 0 =}; // collision detection
+      urgent break
+   :: when(c >= PD)
+      alt { :: busy1 :: busy2 } // carrier is sensed busy
+   };
+   Medium()
+}
+
+process Station()
+{
+   clock c;
+   int(0..BCMAX) bc;
+   int(0..(int)pow(2, BCMAX + 1) - 1) backoff;
+
+   urgent send {= c = 0 =};
+   do
+   {
+      constrain(c <= TD) alt {
+      :: when(c == TD) end; stop
+      :: cd {= c = 0, bc = min(bc + 1, BCMAX) =};
+         do {
+         :: urgent {= backoff = DiscreteUniform(0, (int)pow(2, bc + 1) - 1) =};
+            constrain(c <= backoff * ST) when(c == backoff * ST) alt {
+            :: send {= c = 0 =}; urgent break
+            :: busy {= c = 0, bc = min(bc + 1, BCMAX) =}
+            }
+         }
+      }
+   }
+}
+
+process Observer()
+{
+   alt {
+   :: end1 {= end1_seen = true =}
+   :: end2 {= end2_seen = true =}
+   };
+   Observer()
+}
+
+par {
+:: Medium()
+:: relabel { send, end, busy } by { send1, end1, busy1 } Station()
+:: relabel { send, end, busy } by { send2, end2, busy2 } Station()
+:: Observer()
+}

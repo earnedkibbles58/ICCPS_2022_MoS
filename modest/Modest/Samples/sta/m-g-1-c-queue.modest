@@ -1,0 +1,43 @@
+﻿// Modest STA model of a fixed-capacity queue with exponentially distributed arrivals, normally distributed service time [HHH14]
+// mcsta m-g-1-c-queue.modest -E "TIME_BOUND=5"
+// modes m-g-1-c-queue.modest -E "TIME_BOUND=5" -S ASAP -N 100000
+const real TIME_BOUND;
+
+const int C = 5;
+const real LAMBDA = 10/60; // customer arrival rate
+const int SRV_MEAN = 10; // mean service time
+const int SRV_DEV = 2; // service time standard deviation
+
+int(0..C) queue;
+
+// Probabilistic reachability
+property QueueOverflowProbMax = Pmax(<>[T<=TIME_BOUND] (queue == C));
+property QueueOverflowProbMin = Pmin(<>[T<=TIME_BOUND] (queue == C));
+
+// Expected reachability
+transient bool served_customer;
+property MinCustomersBeforeOverflow = Xmin(S(served_customer ? 1 : 0), queue == C);
+property MinTimeBeforeOverflow = Xmin(T, queue == C);
+
+process Arrivals()
+{
+   clock c; real x;
+   do
+   {
+      when urgent(c >= x && queue < C) {= queue++, c = 0, x = Exp(LAMBDA) =}
+   }
+}
+
+process Server()
+{
+   clock c; real x;
+   do
+   {
+      when urgent(c >= x && queue > 0) {= queue--, c = 0, x = Norm(SRV_MEAN, SRV_DEV), served_customer = true =}
+   }
+}
+
+par {
+:: Arrivals()
+:: Server()
+}

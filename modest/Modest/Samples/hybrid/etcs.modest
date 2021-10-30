@@ -1,0 +1,67 @@
+// Modest SHA model of moving block train control as used in ETCS level 3 [HHHK13]
+// prohver etcs.modest -E "TIME_BOUND=10, SIGMA=10, Normal={(-infty,2],(2,infty)}"
+const real SIGMA; // standard deviation of position measurements
+
+const real SD = 400; // safety distance
+const real L = 200; // length of train
+const real V_MAX = 83.4; // maximum speed of train
+const real A_MAX = 0.7; // maximum acceleration of train
+const real B_OFF = -0.3; // switch-off threshold
+const real B_ON = -0.7; // normal braking deceleration of train
+const real A_MIN = -1.4; // maximum deceleration of train
+
+var s_l = 1400; // position of leading train
+var s_f = 200; // position of following train
+
+var auth = 800; der(auth) = 0; // movement authority of following train
+
+const real TIME_BOUND;
+property P_Crash = Pmax(<>[T<=TIME_BOUND] (s_f >= s_l - L));
+
+process Leader()
+{
+	var a; // acceleration
+	var v = 0; der(v) = a; // speed
+
+	// The leading train can exhibit any behaviour that is
+	// within its acceleration and maximum speed constraints,
+	// except for driving backwards
+	invariant(der(s_l) == v && A_MIN <= a && a <= A_MAX && 0 <= v && v <= V_MAX) stop
+}
+
+process Follower()
+{
+	var a; // acceleration
+	var v = 0; der(v) = a; // speed
+	
+	invariant(der(s_f) == v && 0 <= v && v <= V_MAX) {
+		do {
+			::	// train is running normally
+				invariant(A_MIN <= a && a <= A_MAX && v * V_MAX <= 2 * B_ON * (s_f - auth))
+				when(v * V_MAX >= 2 * B_ON * (s_f - auth)) tau;
+				// forced braking by ETCS system
+				invariant(a == A_MIN && v * V_MAX >= 2 * B_OFF * (s_f - auth))
+				when(v * V_MAX <= 2 * B_OFF * (s_f - auth)) tau
+		}
+	}
+}
+
+process MovingBlock()
+{
+	var m;
+	
+	// get position of leading train
+	invariant(der(m) == 0) delay(8) {= m = Normal(s_l, SIGMA) =};
+	
+	// update follower's movement authority
+	invariant(der(m) == 0) urgent palt {
+		:9: {= auth = m - L - SD  =}; MovingBlock()
+		:1: {= /* message lost */ =}; MovingBlock()
+	}
+}
+
+par {
+	:: Leader()
+	::	Follower()
+	::	MovingBlock()
+}

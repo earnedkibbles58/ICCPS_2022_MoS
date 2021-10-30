@@ -1,0 +1,27 @@
+action start;
+
+// Labels for discrete transitions
+action tg1;
+action td1;
+
+// Places
+var pc1 = 5;
+bool pd1 = true;
+bool pd2 = true;
+
+// Continuous transitions
+der(pc1) = (pd1 ? 2 : 0) - (pd2 ? 1 : 0); // tf1 and tf2
+
+// Timers
+clock pd1_c; real pd1_x = Uni(0, 10);
+clock pd2_c;
+
+// Discrete transitions
+do {
+::	invariant(!pd1 || pd1_c <= pd1_x) when(pd1 && pd1_c >= pd1_x) tg1 {= pd1 = false =}
+::	invariant(!pd2 || pd2_c <= 5) when(pd2 && pd2_c >= 5) td1 {= pd2 = false =}
+}
+
+// Properties
+property ProbFull = Pmax(<> (pc1 >= 10));
+property TimeDone = Xmax(T, !pd1 && !pd2);

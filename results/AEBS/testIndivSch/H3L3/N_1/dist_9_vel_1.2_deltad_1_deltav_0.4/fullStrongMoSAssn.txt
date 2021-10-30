@@ -1,0 +1,51 @@
+next state: [7 3 7 2]
+Prob MoS Holds over schs: 1.0
+s1-s2 running sum: 0.0
+next state: [7 3 8 3]
+Prob MoS Holds over schs: 1.0
+s1-s2 running sum: 2773.86405801997
+next state: [7 3 8 2]
+Prob MoS Holds over schs: 1.0
+s1-s2 running sum: 2773.86405801997
+next state: [7 3 8 4]
+Prob MoS Holds over schs: 0.5
+s1-s2 running sum: -74.34626722970198
+next state: [7 3 8 3]
+Prob MoS Holds over schs: 1.0
+s1-s2 running sum: 2773.86405801997
+next state: [8 3 8 2]
+Prob MoS Holds over schs: 1.0
+s1-s2 running sum: 0.0
+next state: [8 3 9 2]
+Prob MoS Holds over schs: 1.0
+s1-s2 running sum: 1693.1378016489477
+next state: [8 4 8 3]
+Prob MoS Holds over schs: 1.0
+s1-s2 running sum: 2848.210325249889
+next state: [8 4 9 3]
+Prob MoS Holds over schs: 1.0
+s1-s2 running sum: 4541.348126897921
+next state: [8 4 9 4]
+Prob MoS Holds over schs: 1.0
+s1-s2 running sum: 2753.265958008259
+next state: [8 4 9 3]
+Prob MoS Holds over schs: 1.0
+s1-s2 running sum: 4541.348126897921
+next state: [9 3 9 2]
+Prob MoS Holds over schs: 1.0
+s1-s2 running sum: 0.0
+next state: [ 9  3 10  2]
+Prob MoS Holds over schs: 1.0
+s1-s2 running sum: 2637.60326618868
+next state: [9 4 9 3]
+Prob MoS Holds over schs: 1.0
+s1-s2 running sum: 1788.0821688899905
+next state: [ 9  4 10  3]
+Prob MoS Holds over schs: 1.0
+s1-s2 running sum: 4425.685435078537
+next state: [9 5 9 4]
+Prob MoS Holds over schs: 0.6563786008230452
+s1-s2 running sum: 5.3865654341919615
+next state: [ 9  5 10  4]
+Prob MoS Holds over schs: 1.0
+s1-s2 running sum: 4414.5644286288125

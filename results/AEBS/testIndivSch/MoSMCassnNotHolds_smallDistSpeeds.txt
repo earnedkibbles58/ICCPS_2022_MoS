@@ -1,0 +1,6 @@
+dist_9_vel_1.2_deltad_1_deltav_0.4 prob diff: 0.004368501597522001
+dist_9_vel_1.6_deltad_1_deltav_0.4 prob diff: 0.004368501597522001
+dist_9_vel_2_deltad_1_deltav_0.4 prob diff: 0.005657899923626308
+dist_10_vel_1.2_deltad_1_deltav_0.4 prob diff: 0.012014059721684345
+dist_10_vel_1.6_deltad_1_deltav_0.4 prob diff: 0.012014059721684345
+dist_10_vel_2_deltad_1_deltav_0.4 prob diff: 0.012026141424228642

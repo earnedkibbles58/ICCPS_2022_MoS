@@ -1,0 +1,19 @@
+
+This doc describes how to convert PRISM files into the modest format to run LSS on
+
+First, install the strompy docker: https://www.stormchecker.org/documentation/obtain-storm/docker.html#install-docker
+docker pull movesrwth/stormpy:travis
+
+Next, set universal write permissions for the models folder (needed so the docker can write to these folders)
+cd ICCPS_2022
+chmod -R ugo+w models
+
+Next, enter the storm docker (from the ICCPS_2022 folder) and set '.' as the source dir
+docker run --mount type=bind,source="$(pwd)",target=/data -w /opt/storm/build/bin --rm -it --name storm movesrwth/stormpy:travis
+
+
+Next, run script to convert the PRISM files into JANI files (found in /data/stormModelChecker folder)
+- cd /data/stormModelChecker/
+- python3 convertPRISMToJANI.py
+
+

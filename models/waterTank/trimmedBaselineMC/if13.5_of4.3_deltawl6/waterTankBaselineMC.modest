@@ -1,0 +1,1432 @@
+﻿const int wlidInit1;
+const int initContAction1;
+const int wlidInit2;
+const int initContAction2;
+
+int(0..1) sink = 0;
+
+property "1" = filter(max, Pmax(<> (sink == 1)), initial);
+
+process PRISMLattice()
+{
+   int(0..18) wlid1 = wlidInit1;
+   int(0..18) wlidPer1 = wlidInit1;
+   int(0..1) contAction1 = initContAction1;
+   int(0..1) contAction1G = initContAction1;
+   int(0..18) wlid2 = wlidInit2;
+   int(0..18) wlidPer2 = wlidInit2;
+   int(0..1) contAction2 = initContAction2;
+   int(0..1) contAction2G = initContAction2;
+   int(0..2) currN = 0;
+   int(1..3) tankFlag = 1;
+   int(0..25) timesteps = 0;
+   
+   process l()
+   {
+      alt {
+      :: when(wlid2 == 4 && sink == 0 && tankFlag == 2 && currN == 0) palt {
+         :0.1432: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1436: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0205: {= wlidPer2 = 3, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0249: {= wlidPer2 = 4, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0368: {= wlidPer2 = 4, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0535: {= wlidPer2 = 4, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0764: {= wlidPer2 = 4, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0952: {= wlidPer2 = 4, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1028: {= wlidPer2 = 4, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0932: {= wlidPer2 = 5, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0733: {= wlidPer2 = 5, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0527: {= wlidPer2 = 5, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0407: {= wlidPer2 = 5, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.023: {= wlidPer2 = 5, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0202: {= wlidPer2 = 5, currN = 1, tankFlag = 1 =}; 
+            l()
+         }
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 0 && timesteps < 25 && wlid2 == 3) {= wlid2 = 2, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 1 && contAction1 == 0 && wlidPer1 > 4 && sink == 0 && currN == 1) {= contAction1 = 0, currN = 1, tankFlag = 2 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 0 && timesteps < 25 && wlid2 == 0) {= sink = 1 =};
+         l()
+      :: when(wlid2 == 2 && sink == 0 && tankFlag == 2 && currN == 0) palt {
+         :0.1432: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1436: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0205: {= wlidPer2 = 1, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0249: {= wlidPer2 = 2, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0368: {= wlidPer2 = 2, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0535: {= wlidPer2 = 2, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0764: {= wlidPer2 = 2, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0952: {= wlidPer2 = 2, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1028: {= wlidPer2 = 2, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0932: {= wlidPer2 = 3, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0733: {= wlidPer2 = 3, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0527: {= wlidPer2 = 3, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0407: {= wlidPer2 = 3, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.023: {= wlidPer2 = 3, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0202: {= wlidPer2 = 3, currN = 1, tankFlag = 1 =}; 
+            l()
+         }
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 0 && timesteps < 25 && wlid1 == 16) {= wlid1 = 16, tankFlag = 2 =};
+         l()
+      :: when(wlid1 == 0 && sink == 0 && tankFlag == 1 && currN == 0) palt {
+         :0.1432: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.1436: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0205: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.0249: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.0368: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.0535: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.0764: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.0952: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.1028: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.0932: {= wlidPer1 = 1, tankFlag = 2 =}; 
+            l()
+         :0.0733: {= wlidPer1 = 1, tankFlag = 2 =}; 
+            l()
+         :0.0527: {= wlidPer1 = 1, tankFlag = 2 =}; 
+            l()
+         :0.0407: {= wlidPer1 = 1, tankFlag = 2 =}; 
+            l()
+         :0.023: {= wlidPer1 = 1, tankFlag = 2 =}; 
+            l()
+         :0.0202: {= wlidPer1 = 1, tankFlag = 2 =}; 
+            l()
+         }
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 0 && timesteps < 25 && wlid1 == 13) {= wlid1 = 13, tankFlag = 2 =};
+         l()
+      :: when(wlidPer2 < wlidPer1 && sink == 0 && contAction1 == 1 && tankFlag == 3 && contAction2 == 1 && currN == 1) {= contAction1G = 0, contAction2G = contAction2, currN = 2, tankFlag = 1 =};
+         l()
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 0 && timesteps < 25 && wlid1 == 10) {= wlid1 = 10, tankFlag = 2 =};
+         l()
+      :: when(tankFlag == 2 && wlidPer2 >= 14 && sink == 0 && currN == 1) {= contAction2 = 0, currN = 1, tankFlag = 3 =};
+         l()
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 1 && timesteps < 25 && wlid1 == 7) {= wlid1 = 8, tankFlag = 2 =};
+         l()
+      :: when(tankFlag == 1 && wlidPer1 >= 14 && sink == 0 && currN == 1) {= contAction1 = 0, currN = 1, tankFlag = 2 =};
+         l()
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 1 && timesteps < 25 && wlid1 == 4) {= wlid1 = 5, tankFlag = 2 =};
+         l()
+      :: when(wlid2 == 18 && sink == 0 && tankFlag == 2 && currN == 0) palt {
+         :0.1432: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1436: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0205: {= wlidPer2 = 17, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0249: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0368: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0535: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0764: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0952: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1028: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0932: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0733: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0527: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0407: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.023: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0202: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         }
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 1 && timesteps < 25 && wlid1 == 1) {= wlid1 = 2, tankFlag = 2 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 0 && timesteps < 25 && wlid2 == 4) {= wlid2 = 3, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 0 && timesteps < 25 && wlid2 == 1) {= sink = 1 =};
+         l()
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 0 && timesteps < 25 && wlid1 == 17) {= wlid1 = 17, tankFlag = 2 =};
+         l()
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 0 && timesteps < 25 && wlid1 == 14) {= wlid1 = 14, tankFlag = 2 =};
+         l()
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 0 && timesteps < 25 && wlid1 == 11) {= wlid1 = 11, tankFlag = 2 =};
+         l()
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 0 && timesteps < 25 && wlid1 == 8) {= wlid1 = 7, tankFlag = 2 =};
+         l()
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 1 && timesteps < 25 && wlid1 == 5) {= wlid1 = 6, tankFlag = 2 =};
+         l()
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 1 && timesteps < 25 && wlid1 == 2) {= wlid1 = 3, tankFlag = 2 =};
+         l()
+      :: when(wlid1 == 17 && sink == 0 && tankFlag == 1 && currN == 0) palt {
+         :0.1432: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.1436: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0205: {= wlidPer1 = 16, tankFlag = 2 =}; 
+            l()
+         :0.0249: {= wlidPer1 = 17, tankFlag = 2 =}; 
+            l()
+         :0.0368: {= wlidPer1 = 17, tankFlag = 2 =}; 
+            l()
+         :0.0535: {= wlidPer1 = 17, tankFlag = 2 =}; 
+            l()
+         :0.0764: {= wlidPer1 = 17, tankFlag = 2 =}; 
+            l()
+         :0.0952: {= wlidPer1 = 17, tankFlag = 2 =}; 
+            l()
+         :0.1028: {= wlidPer1 = 17, tankFlag = 2 =}; 
+            l()
+         :0.0932: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0733: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0527: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0407: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.023: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0202: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         }
+      :: when(wlid1 == 1 && sink == 0 && tankFlag == 1 && currN == 0) palt {
+         :0.1432: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.1436: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0205: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.0249: {= wlidPer1 = 1, tankFlag = 2 =}; 
+            l()
+         :0.0368: {= wlidPer1 = 1, tankFlag = 2 =}; 
+            l()
+         :0.0535: {= wlidPer1 = 1, tankFlag = 2 =}; 
+            l()
+         :0.0764: {= wlidPer1 = 1, tankFlag = 2 =}; 
+            l()
+         :0.0952: {= wlidPer1 = 1, tankFlag = 2 =}; 
+            l()
+         :0.1028: {= wlidPer1 = 1, tankFlag = 2 =}; 
+            l()
+         :0.0932: {= wlidPer1 = 2, tankFlag = 2 =}; 
+            l()
+         :0.0733: {= wlidPer1 = 2, tankFlag = 2 =}; 
+            l()
+         :0.0527: {= wlidPer1 = 2, tankFlag = 2 =}; 
+            l()
+         :0.0407: {= wlidPer1 = 2, tankFlag = 2 =}; 
+            l()
+         :0.023: {= wlidPer1 = 2, tankFlag = 2 =}; 
+            l()
+         :0.0202: {= wlidPer1 = 2, tankFlag = 2 =}; 
+            l()
+         }
+      :: when(wlid1 == 2 && sink == 0 && tankFlag == 1 && currN == 0) palt {
+         :0.1432: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.1436: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0205: {= wlidPer1 = 1, tankFlag = 2 =}; 
+            l()
+         :0.0249: {= wlidPer1 = 2, tankFlag = 2 =}; 
+            l()
+         :0.0368: {= wlidPer1 = 2, tankFlag = 2 =}; 
+            l()
+         :0.0535: {= wlidPer1 = 2, tankFlag = 2 =}; 
+            l()
+         :0.0764: {= wlidPer1 = 2, tankFlag = 2 =}; 
+            l()
+         :0.0952: {= wlidPer1 = 2, tankFlag = 2 =}; 
+            l()
+         :0.1028: {= wlidPer1 = 2, tankFlag = 2 =}; 
+            l()
+         :0.0932: {= wlidPer1 = 3, tankFlag = 2 =}; 
+            l()
+         :0.0733: {= wlidPer1 = 3, tankFlag = 2 =}; 
+            l()
+         :0.0527: {= wlidPer1 = 3, tankFlag = 2 =}; 
+            l()
+         :0.0407: {= wlidPer1 = 3, tankFlag = 2 =}; 
+            l()
+         :0.023: {= wlidPer1 = 3, tankFlag = 2 =}; 
+            l()
+         :0.0202: {= wlidPer1 = 3, tankFlag = 2 =}; 
+            l()
+         }
+      :: when(wlid1 == 3 && sink == 0 && tankFlag == 1 && currN == 0) palt {
+         :0.1432: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.1436: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0205: {= wlidPer1 = 2, tankFlag = 2 =}; 
+            l()
+         :0.0249: {= wlidPer1 = 3, tankFlag = 2 =}; 
+            l()
+         :0.0368: {= wlidPer1 = 3, tankFlag = 2 =}; 
+            l()
+         :0.0535: {= wlidPer1 = 3, tankFlag = 2 =}; 
+            l()
+         :0.0764: {= wlidPer1 = 3, tankFlag = 2 =}; 
+            l()
+         :0.0952: {= wlidPer1 = 3, tankFlag = 2 =}; 
+            l()
+         :0.1028: {= wlidPer1 = 3, tankFlag = 2 =}; 
+            l()
+         :0.0932: {= wlidPer1 = 4, tankFlag = 2 =}; 
+            l()
+         :0.0733: {= wlidPer1 = 4, tankFlag = 2 =}; 
+            l()
+         :0.0527: {= wlidPer1 = 4, tankFlag = 2 =}; 
+            l()
+         :0.0407: {= wlidPer1 = 4, tankFlag = 2 =}; 
+            l()
+         :0.023: {= wlidPer1 = 4, tankFlag = 2 =}; 
+            l()
+         :0.0202: {= wlidPer1 = 4, tankFlag = 2 =}; 
+            l()
+         }
+      :: when(wlid1 == 4 && sink == 0 && tankFlag == 1 && currN == 0) palt {
+         :0.1432: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.1436: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0205: {= wlidPer1 = 3, tankFlag = 2 =}; 
+            l()
+         :0.0249: {= wlidPer1 = 4, tankFlag = 2 =}; 
+            l()
+         :0.0368: {= wlidPer1 = 4, tankFlag = 2 =}; 
+            l()
+         :0.0535: {= wlidPer1 = 4, tankFlag = 2 =}; 
+            l()
+         :0.0764: {= wlidPer1 = 4, tankFlag = 2 =}; 
+            l()
+         :0.0952: {= wlidPer1 = 4, tankFlag = 2 =}; 
+            l()
+         :0.1028: {= wlidPer1 = 4, tankFlag = 2 =}; 
+            l()
+         :0.0932: {= wlidPer1 = 5, tankFlag = 2 =}; 
+            l()
+         :0.0733: {= wlidPer1 = 5, tankFlag = 2 =}; 
+            l()
+         :0.0527: {= wlidPer1 = 5, tankFlag = 2 =}; 
+            l()
+         :0.0407: {= wlidPer1 = 5, tankFlag = 2 =}; 
+            l()
+         :0.023: {= wlidPer1 = 5, tankFlag = 2 =}; 
+            l()
+         :0.0202: {= wlidPer1 = 5, tankFlag = 2 =}; 
+            l()
+         }
+      :: when(wlid1 == 5 && sink == 0 && tankFlag == 1 && currN == 0) palt {
+         :0.1432: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.1436: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0205: {= wlidPer1 = 4, tankFlag = 2 =}; 
+            l()
+         :0.0249: {= wlidPer1 = 5, tankFlag = 2 =}; 
+            l()
+         :0.0368: {= wlidPer1 = 5, tankFlag = 2 =}; 
+            l()
+         :0.0535: {= wlidPer1 = 5, tankFlag = 2 =}; 
+            l()
+         :0.0764: {= wlidPer1 = 5, tankFlag = 2 =}; 
+            l()
+         :0.0952: {= wlidPer1 = 5, tankFlag = 2 =}; 
+            l()
+         :0.1028: {= wlidPer1 = 5, tankFlag = 2 =}; 
+            l()
+         :0.0932: {= wlidPer1 = 6, tankFlag = 2 =}; 
+            l()
+         :0.0733: {= wlidPer1 = 6, tankFlag = 2 =}; 
+            l()
+         :0.0527: {= wlidPer1 = 6, tankFlag = 2 =}; 
+            l()
+         :0.0407: {= wlidPer1 = 6, tankFlag = 2 =}; 
+            l()
+         :0.023: {= wlidPer1 = 6, tankFlag = 2 =}; 
+            l()
+         :0.0202: {= wlidPer1 = 6, tankFlag = 2 =}; 
+            l()
+         }
+      :: when(wlid1 == 6 && sink == 0 && tankFlag == 1 && currN == 0) palt {
+         :0.1432: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.1436: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0205: {= wlidPer1 = 5, tankFlag = 2 =}; 
+            l()
+         :0.0249: {= wlidPer1 = 6, tankFlag = 2 =}; 
+            l()
+         :0.0368: {= wlidPer1 = 6, tankFlag = 2 =}; 
+            l()
+         :0.0535: {= wlidPer1 = 6, tankFlag = 2 =}; 
+            l()
+         :0.0764: {= wlidPer1 = 6, tankFlag = 2 =}; 
+            l()
+         :0.0952: {= wlidPer1 = 6, tankFlag = 2 =}; 
+            l()
+         :0.1028: {= wlidPer1 = 6, tankFlag = 2 =}; 
+            l()
+         :0.0932: {= wlidPer1 = 7, tankFlag = 2 =}; 
+            l()
+         :0.0733: {= wlidPer1 = 7, tankFlag = 2 =}; 
+            l()
+         :0.0527: {= wlidPer1 = 7, tankFlag = 2 =}; 
+            l()
+         :0.0407: {= wlidPer1 = 7, tankFlag = 2 =}; 
+            l()
+         :0.023: {= wlidPer1 = 7, tankFlag = 2 =}; 
+            l()
+         :0.0202: {= wlidPer1 = 7, tankFlag = 2 =}; 
+            l()
+         }
+      :: when(wlid1 == 7 && sink == 0 && tankFlag == 1 && currN == 0) palt {
+         :0.1432: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.1436: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0205: {= wlidPer1 = 6, tankFlag = 2 =}; 
+            l()
+         :0.0249: {= wlidPer1 = 7, tankFlag = 2 =}; 
+            l()
+         :0.0368: {= wlidPer1 = 7, tankFlag = 2 =}; 
+            l()
+         :0.0535: {= wlidPer1 = 7, tankFlag = 2 =}; 
+            l()
+         :0.0764: {= wlidPer1 = 7, tankFlag = 2 =}; 
+            l()
+         :0.0952: {= wlidPer1 = 7, tankFlag = 2 =}; 
+            l()
+         :0.1028: {= wlidPer1 = 7, tankFlag = 2 =}; 
+            l()
+         :0.0932: {= wlidPer1 = 8, tankFlag = 2 =}; 
+            l()
+         :0.0733: {= wlidPer1 = 8, tankFlag = 2 =}; 
+            l()
+         :0.0527: {= wlidPer1 = 8, tankFlag = 2 =}; 
+            l()
+         :0.0407: {= wlidPer1 = 8, tankFlag = 2 =}; 
+            l()
+         :0.023: {= wlidPer1 = 8, tankFlag = 2 =}; 
+            l()
+         :0.0202: {= wlidPer1 = 8, tankFlag = 2 =}; 
+            l()
+         }
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 1 && timesteps < 25 && wlid1 == 0) {= sink = 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 1 && timesteps < 25 && wlid2 == 18) {= sink = 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 1 && timesteps < 25 && wlid2 == 17) {= sink = 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 1 && timesteps < 25 && wlid2 == 16) {= sink = 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 1 && timesteps < 25 && wlid2 == 15) {= wlid2 = 17, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 1 && timesteps < 25 && wlid2 == 14) {= wlid2 = 16, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 1 && timesteps < 25 && wlid2 == 13) {= wlid2 = 15, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 1 && timesteps < 25 && wlid2 == 12) {= wlid2 = 14, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 1 && timesteps < 25 && wlid2 == 11) {= wlid2 = 13, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 1 && timesteps < 25 && wlid2 == 10) {= wlid2 = 12, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 1 && timesteps < 25 && wlid2 == 9) {= wlid2 = 11, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 1 && timesteps < 25 && wlid2 == 8) {= wlid2 = 10, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 1 && timesteps < 25 && wlid2 == 7) {= wlid2 = 9, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 0 && timesteps < 25 && wlid2 == 7) {= wlid2 = 6, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 0 && timesteps < 25 && wlid2 == 6) {= wlid2 = 5, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 0 && timesteps < 25 && wlid2 == 5) {= wlid2 = 4, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 1 && timesteps < 25 && wlid1 == 6) {= wlid1 = 7, tankFlag = 2 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 0 && timesteps < 25 && wlid2 == 2) {= wlid2 = 1, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(wlid2 == 14 && sink == 0 && tankFlag == 2 && currN == 0) palt {
+         :0.1432: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1436: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0205: {= wlidPer2 = 13, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0249: {= wlidPer2 = 14, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0368: {= wlidPer2 = 14, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0535: {= wlidPer2 = 14, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0764: {= wlidPer2 = 14, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0952: {= wlidPer2 = 14, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1028: {= wlidPer2 = 14, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0932: {= wlidPer2 = 15, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0733: {= wlidPer2 = 15, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0527: {= wlidPer2 = 15, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0407: {= wlidPer2 = 15, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.023: {= wlidPer2 = 15, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0202: {= wlidPer2 = 15, currN = 1, tankFlag = 1 =}; 
+            l()
+         }
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 1 && timesteps < 25 && wlid1 == 3) {= wlid1 = 4, tankFlag = 2 =};
+         l()
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 0 && timesteps < 25 && wlid1 == 18) {= sink = 1 =};
+         l()
+      :: when(wlid2 == 12 && sink == 0 && tankFlag == 2 && currN == 0) palt {
+         :0.1432: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1436: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0205: {= wlidPer2 = 11, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0249: {= wlidPer2 = 12, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0368: {= wlidPer2 = 12, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0535: {= wlidPer2 = 12, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0764: {= wlidPer2 = 12, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0952: {= wlidPer2 = 12, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1028: {= wlidPer2 = 12, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0932: {= wlidPer2 = 13, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0733: {= wlidPer2 = 13, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0527: {= wlidPer2 = 13, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0407: {= wlidPer2 = 13, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.023: {= wlidPer2 = 13, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0202: {= wlidPer2 = 13, currN = 1, tankFlag = 1 =}; 
+            l()
+         }
+      :: when(wlid2 == 16 && sink == 0 && tankFlag == 2 && currN == 0) palt {
+         :0.1432: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1436: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0205: {= wlidPer2 = 15, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0249: {= wlidPer2 = 16, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0368: {= wlidPer2 = 16, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0535: {= wlidPer2 = 16, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0764: {= wlidPer2 = 16, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0952: {= wlidPer2 = 16, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1028: {= wlidPer2 = 16, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0932: {= wlidPer2 = 17, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0733: {= wlidPer2 = 17, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0527: {= wlidPer2 = 17, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0407: {= wlidPer2 = 17, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.023: {= wlidPer2 = 17, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0202: {= wlidPer2 = 17, currN = 1, tankFlag = 1 =}; 
+            l()
+         }
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 0 && timesteps < 25 && wlid1 == 15) {= wlid1 = 15, tankFlag = 2 =};
+         l()
+      :: when(wlid2 == 10 && sink == 0 && tankFlag == 2 && currN == 0) palt {
+         :0.1432: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1436: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0205: {= wlidPer2 = 9, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0249: {= wlidPer2 = 10, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0368: {= wlidPer2 = 10, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0535: {= wlidPer2 = 10, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0764: {= wlidPer2 = 10, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0952: {= wlidPer2 = 10, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1028: {= wlidPer2 = 10, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0932: {= wlidPer2 = 11, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0733: {= wlidPer2 = 11, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0527: {= wlidPer2 = 11, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0407: {= wlidPer2 = 11, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.023: {= wlidPer2 = 11, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0202: {= wlidPer2 = 11, currN = 1, tankFlag = 1 =}; 
+            l()
+         }
+      :: when(wlid2 == 0 && sink == 0 && tankFlag == 2 && currN == 0) palt {
+         :0.1432: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1436: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0205: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0249: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0368: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0535: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0764: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0952: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1028: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0932: {= wlidPer2 = 1, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0733: {= wlidPer2 = 1, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0527: {= wlidPer2 = 1, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0407: {= wlidPer2 = 1, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.023: {= wlidPer2 = 1, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0202: {= wlidPer2 = 1, currN = 1, tankFlag = 1 =}; 
+            l()
+         }
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 0 && timesteps < 25 && wlid1 == 12) {= wlid1 = 12, tankFlag = 2 =};
+         l()
+      :: when(wlid2 == 8 && sink == 0 && tankFlag == 2 && currN == 0) palt {
+         :0.1432: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1436: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0205: {= wlidPer2 = 7, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0249: {= wlidPer2 = 8, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0368: {= wlidPer2 = 8, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0535: {= wlidPer2 = 8, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0764: {= wlidPer2 = 8, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0952: {= wlidPer2 = 8, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1028: {= wlidPer2 = 8, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0932: {= wlidPer2 = 9, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0733: {= wlidPer2 = 9, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0527: {= wlidPer2 = 9, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0407: {= wlidPer2 = 9, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.023: {= wlidPer2 = 9, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0202: {= wlidPer2 = 9, currN = 1, tankFlag = 1 =}; 
+            l()
+         }
+      :: when(contAction2 == 0 && sink == 0 && tankFlag == 3 && contAction1 == 0 && currN == 1) {= contAction1G = contAction1, contAction2G = contAction2, currN = 2, tankFlag = 1 =};
+         l()
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 0 && timesteps < 25 && wlid1 == 9) {= wlid1 = 8, tankFlag = 2 =};
+         l()
+      :: when(wlid2 == 6 && sink == 0 && tankFlag == 2 && currN == 0) palt {
+         :0.1432: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1436: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0205: {= wlidPer2 = 5, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0249: {= wlidPer2 = 6, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0368: {= wlidPer2 = 6, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0535: {= wlidPer2 = 6, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0764: {= wlidPer2 = 6, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0952: {= wlidPer2 = 6, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1028: {= wlidPer2 = 6, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0932: {= wlidPer2 = 7, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0733: {= wlidPer2 = 7, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0527: {= wlidPer2 = 7, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0407: {= wlidPer2 = 7, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.023: {= wlidPer2 = 7, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0202: {= wlidPer2 = 7, currN = 1, tankFlag = 1 =}; 
+            l()
+         }
+      :: when(tankFlag == 2 && contAction2 == 0 && wlidPer2 > 4 && sink == 0 && currN == 1) {= contAction2 = 0, currN = 1, tankFlag = 3 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 1 && timesteps < 25 && wlid2 == 3) {= wlid2 = 4, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(wlid1 == 9 && sink == 0 && tankFlag == 1 && currN == 0) palt {
+         :0.1432: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.1436: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0205: {= wlidPer1 = 8, tankFlag = 2 =}; 
+            l()
+         :0.0249: {= wlidPer1 = 9, tankFlag = 2 =}; 
+            l()
+         :0.0368: {= wlidPer1 = 9, tankFlag = 2 =}; 
+            l()
+         :0.0535: {= wlidPer1 = 9, tankFlag = 2 =}; 
+            l()
+         :0.0764: {= wlidPer1 = 9, tankFlag = 2 =}; 
+            l()
+         :0.0952: {= wlidPer1 = 9, tankFlag = 2 =}; 
+            l()
+         :0.1028: {= wlidPer1 = 9, tankFlag = 2 =}; 
+            l()
+         :0.0932: {= wlidPer1 = 10, tankFlag = 2 =}; 
+            l()
+         :0.0733: {= wlidPer1 = 10, tankFlag = 2 =}; 
+            l()
+         :0.0527: {= wlidPer1 = 10, tankFlag = 2 =}; 
+            l()
+         :0.0407: {= wlidPer1 = 10, tankFlag = 2 =}; 
+            l()
+         :0.023: {= wlidPer1 = 10, tankFlag = 2 =}; 
+            l()
+         :0.0202: {= wlidPer1 = 10, tankFlag = 2 =}; 
+            l()
+         }
+      :: when(wlid1 == 10 && sink == 0 && tankFlag == 1 && currN == 0) palt {
+         :0.1432: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.1436: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0205: {= wlidPer1 = 9, tankFlag = 2 =}; 
+            l()
+         :0.0249: {= wlidPer1 = 10, tankFlag = 2 =}; 
+            l()
+         :0.0368: {= wlidPer1 = 10, tankFlag = 2 =}; 
+            l()
+         :0.0535: {= wlidPer1 = 10, tankFlag = 2 =}; 
+            l()
+         :0.0764: {= wlidPer1 = 10, tankFlag = 2 =}; 
+            l()
+         :0.0952: {= wlidPer1 = 10, tankFlag = 2 =}; 
+            l()
+         :0.1028: {= wlidPer1 = 10, tankFlag = 2 =}; 
+            l()
+         :0.0932: {= wlidPer1 = 11, tankFlag = 2 =}; 
+            l()
+         :0.0733: {= wlidPer1 = 11, tankFlag = 2 =}; 
+            l()
+         :0.0527: {= wlidPer1 = 11, tankFlag = 2 =}; 
+            l()
+         :0.0407: {= wlidPer1 = 11, tankFlag = 2 =}; 
+            l()
+         :0.023: {= wlidPer1 = 11, tankFlag = 2 =}; 
+            l()
+         :0.0202: {= wlidPer1 = 11, tankFlag = 2 =}; 
+            l()
+         }
+      :: when(wlid1 == 11 && sink == 0 && tankFlag == 1 && currN == 0) palt {
+         :0.1432: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.1436: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0205: {= wlidPer1 = 10, tankFlag = 2 =}; 
+            l()
+         :0.0249: {= wlidPer1 = 11, tankFlag = 2 =}; 
+            l()
+         :0.0368: {= wlidPer1 = 11, tankFlag = 2 =}; 
+            l()
+         :0.0535: {= wlidPer1 = 11, tankFlag = 2 =}; 
+            l()
+         :0.0764: {= wlidPer1 = 11, tankFlag = 2 =}; 
+            l()
+         :0.0952: {= wlidPer1 = 11, tankFlag = 2 =}; 
+            l()
+         :0.1028: {= wlidPer1 = 11, tankFlag = 2 =}; 
+            l()
+         :0.0932: {= wlidPer1 = 12, tankFlag = 2 =}; 
+            l()
+         :0.0733: {= wlidPer1 = 12, tankFlag = 2 =}; 
+            l()
+         :0.0527: {= wlidPer1 = 12, tankFlag = 2 =}; 
+            l()
+         :0.0407: {= wlidPer1 = 12, tankFlag = 2 =}; 
+            l()
+         :0.023: {= wlidPer1 = 12, tankFlag = 2 =}; 
+            l()
+         :0.0202: {= wlidPer1 = 12, tankFlag = 2 =}; 
+            l()
+         }
+      :: when(wlid1 == 12 && sink == 0 && tankFlag == 1 && currN == 0) palt {
+         :0.1432: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.1436: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0205: {= wlidPer1 = 11, tankFlag = 2 =}; 
+            l()
+         :0.0249: {= wlidPer1 = 12, tankFlag = 2 =}; 
+            l()
+         :0.0368: {= wlidPer1 = 12, tankFlag = 2 =}; 
+            l()
+         :0.0535: {= wlidPer1 = 12, tankFlag = 2 =}; 
+            l()
+         :0.0764: {= wlidPer1 = 12, tankFlag = 2 =}; 
+            l()
+         :0.0952: {= wlidPer1 = 12, tankFlag = 2 =}; 
+            l()
+         :0.1028: {= wlidPer1 = 12, tankFlag = 2 =}; 
+            l()
+         :0.0932: {= wlidPer1 = 13, tankFlag = 2 =}; 
+            l()
+         :0.0733: {= wlidPer1 = 13, tankFlag = 2 =}; 
+            l()
+         :0.0527: {= wlidPer1 = 13, tankFlag = 2 =}; 
+            l()
+         :0.0407: {= wlidPer1 = 13, tankFlag = 2 =}; 
+            l()
+         :0.023: {= wlidPer1 = 13, tankFlag = 2 =}; 
+            l()
+         :0.0202: {= wlidPer1 = 13, tankFlag = 2 =}; 
+            l()
+         }
+      :: when(wlid1 == 13 && sink == 0 && tankFlag == 1 && currN == 0) palt {
+         :0.1432: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.1436: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0205: {= wlidPer1 = 12, tankFlag = 2 =}; 
+            l()
+         :0.0249: {= wlidPer1 = 13, tankFlag = 2 =}; 
+            l()
+         :0.0368: {= wlidPer1 = 13, tankFlag = 2 =}; 
+            l()
+         :0.0535: {= wlidPer1 = 13, tankFlag = 2 =}; 
+            l()
+         :0.0764: {= wlidPer1 = 13, tankFlag = 2 =}; 
+            l()
+         :0.0952: {= wlidPer1 = 13, tankFlag = 2 =}; 
+            l()
+         :0.1028: {= wlidPer1 = 13, tankFlag = 2 =}; 
+            l()
+         :0.0932: {= wlidPer1 = 14, tankFlag = 2 =}; 
+            l()
+         :0.0733: {= wlidPer1 = 14, tankFlag = 2 =}; 
+            l()
+         :0.0527: {= wlidPer1 = 14, tankFlag = 2 =}; 
+            l()
+         :0.0407: {= wlidPer1 = 14, tankFlag = 2 =}; 
+            l()
+         :0.023: {= wlidPer1 = 14, tankFlag = 2 =}; 
+            l()
+         :0.0202: {= wlidPer1 = 14, tankFlag = 2 =}; 
+            l()
+         }
+      :: when(wlid1 == 14 && sink == 0 && tankFlag == 1 && currN == 0) palt {
+         :0.1432: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.1436: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0205: {= wlidPer1 = 13, tankFlag = 2 =}; 
+            l()
+         :0.0249: {= wlidPer1 = 14, tankFlag = 2 =}; 
+            l()
+         :0.0368: {= wlidPer1 = 14, tankFlag = 2 =}; 
+            l()
+         :0.0535: {= wlidPer1 = 14, tankFlag = 2 =}; 
+            l()
+         :0.0764: {= wlidPer1 = 14, tankFlag = 2 =}; 
+            l()
+         :0.0952: {= wlidPer1 = 14, tankFlag = 2 =}; 
+            l()
+         :0.1028: {= wlidPer1 = 14, tankFlag = 2 =}; 
+            l()
+         :0.0932: {= wlidPer1 = 15, tankFlag = 2 =}; 
+            l()
+         :0.0733: {= wlidPer1 = 15, tankFlag = 2 =}; 
+            l()
+         :0.0527: {= wlidPer1 = 15, tankFlag = 2 =}; 
+            l()
+         :0.0407: {= wlidPer1 = 15, tankFlag = 2 =}; 
+            l()
+         :0.023: {= wlidPer1 = 15, tankFlag = 2 =}; 
+            l()
+         :0.0202: {= wlidPer1 = 15, tankFlag = 2 =}; 
+            l()
+         }
+      :: when(wlid1 == 15 && sink == 0 && tankFlag == 1 && currN == 0) palt {
+         :0.1432: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.1436: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0205: {= wlidPer1 = 14, tankFlag = 2 =}; 
+            l()
+         :0.0249: {= wlidPer1 = 15, tankFlag = 2 =}; 
+            l()
+         :0.0368: {= wlidPer1 = 15, tankFlag = 2 =}; 
+            l()
+         :0.0535: {= wlidPer1 = 15, tankFlag = 2 =}; 
+            l()
+         :0.0764: {= wlidPer1 = 15, tankFlag = 2 =}; 
+            l()
+         :0.0952: {= wlidPer1 = 15, tankFlag = 2 =}; 
+            l()
+         :0.1028: {= wlidPer1 = 15, tankFlag = 2 =}; 
+            l()
+         :0.0932: {= wlidPer1 = 16, tankFlag = 2 =}; 
+            l()
+         :0.0733: {= wlidPer1 = 16, tankFlag = 2 =}; 
+            l()
+         :0.0527: {= wlidPer1 = 16, tankFlag = 2 =}; 
+            l()
+         :0.0407: {= wlidPer1 = 16, tankFlag = 2 =}; 
+            l()
+         :0.023: {= wlidPer1 = 16, tankFlag = 2 =}; 
+            l()
+         :0.0202: {= wlidPer1 = 16, tankFlag = 2 =}; 
+            l()
+         }
+      :: when(wlid1 == 16 && sink == 0 && tankFlag == 1 && currN == 0) palt {
+         :0.1432: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.1436: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0205: {= wlidPer1 = 15, tankFlag = 2 =}; 
+            l()
+         :0.0249: {= wlidPer1 = 16, tankFlag = 2 =}; 
+            l()
+         :0.0368: {= wlidPer1 = 16, tankFlag = 2 =}; 
+            l()
+         :0.0535: {= wlidPer1 = 16, tankFlag = 2 =}; 
+            l()
+         :0.0764: {= wlidPer1 = 16, tankFlag = 2 =}; 
+            l()
+         :0.0952: {= wlidPer1 = 16, tankFlag = 2 =}; 
+            l()
+         :0.1028: {= wlidPer1 = 16, tankFlag = 2 =}; 
+            l()
+         :0.0932: {= wlidPer1 = 17, tankFlag = 2 =}; 
+            l()
+         :0.0733: {= wlidPer1 = 17, tankFlag = 2 =}; 
+            l()
+         :0.0527: {= wlidPer1 = 17, tankFlag = 2 =}; 
+            l()
+         :0.0407: {= wlidPer1 = 17, tankFlag = 2 =}; 
+            l()
+         :0.023: {= wlidPer1 = 17, tankFlag = 2 =}; 
+            l()
+         :0.0202: {= wlidPer1 = 17, tankFlag = 2 =}; 
+            l()
+         }
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 0 && timesteps < 25 && wlid1 == 2) {= wlid1 = 1, tankFlag = 2 =};
+         l()
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 0 && timesteps < 25 && wlid1 == 5) {= wlid1 = 4, tankFlag = 2 =};
+         l()
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 1 && timesteps < 25 && wlid1 == 7) {= wlid1 = 9, tankFlag = 2 =};
+         l()
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 1 && timesteps < 25 && wlid1 == 10) {= wlid1 = 12, tankFlag = 2 =};
+         l()
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 1 && timesteps < 25 && wlid1 == 13) {= wlid1 = 15, tankFlag = 2 =};
+         l()
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 1 && timesteps < 25 && wlid1 == 16) {= sink = 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 1 && timesteps < 25 && wlid2 == 0) {= sink = 1 =};
+         l()
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 0 && timesteps < 25 && wlid1 == 0) {= sink = 1 =};
+         l()
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 0 && timesteps < 25 && wlid1 == 1) {= sink = 1 =};
+         l()
+      :: when(wlid2 == 17 && sink == 0 && tankFlag == 2 && currN == 0) palt {
+         :0.1432: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1436: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0205: {= wlidPer2 = 16, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0249: {= wlidPer2 = 17, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0368: {= wlidPer2 = 17, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0535: {= wlidPer2 = 17, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0764: {= wlidPer2 = 17, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0952: {= wlidPer2 = 17, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1028: {= wlidPer2 = 17, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0932: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0733: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0527: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0407: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.023: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0202: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         }
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 0 && timesteps < 25 && wlid1 == 4) {= wlid1 = 3, tankFlag = 2 =};
+         l()
+      :: when(tankFlag == 1 && contAction1 != 0 && wlidPer1 < 14 && sink == 0 && currN == 1) {= contAction1 = 1, currN = 1, tankFlag = 2 =};
+         l()
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 0 && timesteps < 25 && wlid1 == 7) {= wlid1 = 6, tankFlag = 2 =};
+         l()
+      :: when(tankFlag == 2 && contAction2 != 0 && wlidPer2 < 14 && sink == 0 && currN == 1) {= contAction2 = 1, currN = 1, tankFlag = 3 =};
+         l()
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 1 && timesteps < 25 && wlid1 == 9) {= wlid1 = 11, tankFlag = 2 =};
+         l()
+      :: when(wlidPer1 <= wlidPer2 && sink == 0 && contAction1 == 1 && tankFlag == 3 && contAction2 == 1 && currN == 1) {= contAction1G = contAction1, contAction2G = 0, currN = 2, tankFlag = 1 =};
+         l()
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 1 && timesteps < 25 && wlid1 == 12) {= wlid1 = 14, tankFlag = 2 =};
+         l()
+      :: when(wlid1 == 8 && sink == 0 && tankFlag == 1 && currN == 0) palt {
+         :0.1432: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.1436: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0205: {= wlidPer1 = 7, tankFlag = 2 =}; 
+            l()
+         :0.0249: {= wlidPer1 = 8, tankFlag = 2 =}; 
+            l()
+         :0.0368: {= wlidPer1 = 8, tankFlag = 2 =}; 
+            l()
+         :0.0535: {= wlidPer1 = 8, tankFlag = 2 =}; 
+            l()
+         :0.0764: {= wlidPer1 = 8, tankFlag = 2 =}; 
+            l()
+         :0.0952: {= wlidPer1 = 8, tankFlag = 2 =}; 
+            l()
+         :0.1028: {= wlidPer1 = 8, tankFlag = 2 =}; 
+            l()
+         :0.0932: {= wlidPer1 = 9, tankFlag = 2 =}; 
+            l()
+         :0.0733: {= wlidPer1 = 9, tankFlag = 2 =}; 
+            l()
+         :0.0527: {= wlidPer1 = 9, tankFlag = 2 =}; 
+            l()
+         :0.0407: {= wlidPer1 = 9, tankFlag = 2 =}; 
+            l()
+         :0.023: {= wlidPer1 = 9, tankFlag = 2 =}; 
+            l()
+         :0.0202: {= wlidPer1 = 9, tankFlag = 2 =}; 
+            l()
+         }
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 1 && timesteps < 25 && wlid1 == 15) {= wlid1 = 17, tankFlag = 2 =};
+         l()
+      :: when(wlid2 == 1 && sink == 0 && tankFlag == 2 && currN == 0) palt {
+         :0.1432: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1436: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0205: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0249: {= wlidPer2 = 1, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0368: {= wlidPer2 = 1, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0535: {= wlidPer2 = 1, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0764: {= wlidPer2 = 1, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0952: {= wlidPer2 = 1, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1028: {= wlidPer2 = 1, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0932: {= wlidPer2 = 2, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0733: {= wlidPer2 = 2, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0527: {= wlidPer2 = 2, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0407: {= wlidPer2 = 2, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.023: {= wlidPer2 = 2, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0202: {= wlidPer2 = 2, currN = 1, tankFlag = 1 =}; 
+            l()
+         }
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 1 && timesteps < 25 && wlid1 == 18) {= sink = 1 =};
+         l()
+      :: when(tankFlag == 1 && wlidPer1 <= 4 && sink == 0 && currN == 1) {= contAction1 = 1, currN = 1, tankFlag = 2 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 1 && timesteps < 25 && wlid2 == 2) {= wlid2 = 3, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 0 && timesteps < 25 && wlid1 == 6) {= wlid1 = 5, tankFlag = 2 =};
+         l()
+      :: when(tankFlag == 2 && wlidPer2 <= 4 && sink == 0 && currN == 1) {= contAction2 = 1, currN = 1, tankFlag = 3 =};
+         l()
+      :: when(wlid2 == 5 && sink == 0 && tankFlag == 2 && currN == 0) palt {
+         :0.1432: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1436: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0205: {= wlidPer2 = 4, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0249: {= wlidPer2 = 5, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0368: {= wlidPer2 = 5, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0535: {= wlidPer2 = 5, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0764: {= wlidPer2 = 5, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0952: {= wlidPer2 = 5, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1028: {= wlidPer2 = 5, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0932: {= wlidPer2 = 6, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0733: {= wlidPer2 = 6, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0527: {= wlidPer2 = 6, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0407: {= wlidPer2 = 6, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.023: {= wlidPer2 = 6, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0202: {= wlidPer2 = 6, currN = 1, tankFlag = 1 =}; 
+            l()
+         }
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 1 && timesteps < 25 && wlid1 == 8) {= wlid1 = 10, tankFlag = 2 =};
+         l()
+      :: when(contAction1 != contAction2 && sink == 0 && tankFlag == 3 && currN == 1) {= contAction1G = contAction1, contAction2G = contAction2, currN = 2, tankFlag = 1 =};
+         l()
+      :: when(wlid2 == 7 && sink == 0 && tankFlag == 2 && currN == 0) palt {
+         :0.1432: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1436: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0205: {= wlidPer2 = 6, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0249: {= wlidPer2 = 7, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0368: {= wlidPer2 = 7, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0535: {= wlidPer2 = 7, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0764: {= wlidPer2 = 7, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0952: {= wlidPer2 = 7, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1028: {= wlidPer2 = 7, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0932: {= wlidPer2 = 8, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0733: {= wlidPer2 = 8, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0527: {= wlidPer2 = 8, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0407: {= wlidPer2 = 8, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.023: {= wlidPer2 = 8, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0202: {= wlidPer2 = 8, currN = 1, tankFlag = 1 =}; 
+            l()
+         }
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 1 && timesteps < 25 && wlid1 == 11) {= wlid1 = 13, tankFlag = 2 =};
+         l()
+      :: when(wlid1 == 18 && sink == 0 && tankFlag == 1 && currN == 0) palt {
+         :0.1432: {= wlidPer1 = 0, tankFlag = 2 =}; 
+            l()
+         :0.1436: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0205: {= wlidPer1 = 17, tankFlag = 2 =}; 
+            l()
+         :0.0249: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0368: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0535: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0764: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0952: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.1028: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0932: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0733: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0527: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0407: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.023: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         :0.0202: {= wlidPer1 = 18, tankFlag = 2 =}; 
+            l()
+         }
+      :: when(wlid2 == 9 && sink == 0 && tankFlag == 2 && currN == 0) palt {
+         :0.1432: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1436: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0205: {= wlidPer2 = 8, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0249: {= wlidPer2 = 9, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0368: {= wlidPer2 = 9, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0535: {= wlidPer2 = 9, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0764: {= wlidPer2 = 9, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0952: {= wlidPer2 = 9, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1028: {= wlidPer2 = 9, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0932: {= wlidPer2 = 10, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0733: {= wlidPer2 = 10, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0527: {= wlidPer2 = 10, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0407: {= wlidPer2 = 10, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.023: {= wlidPer2 = 10, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0202: {= wlidPer2 = 10, currN = 1, tankFlag = 1 =}; 
+            l()
+         }
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 1 && timesteps < 25 && wlid1 == 14) {= wlid1 = 16, tankFlag = 2 =};
+         l()
+      :: when(wlid2 == 15 && sink == 0 && tankFlag == 2 && currN == 0) palt {
+         :0.1432: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1436: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0205: {= wlidPer2 = 14, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0249: {= wlidPer2 = 15, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0368: {= wlidPer2 = 15, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0535: {= wlidPer2 = 15, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0764: {= wlidPer2 = 15, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0952: {= wlidPer2 = 15, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1028: {= wlidPer2 = 15, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0932: {= wlidPer2 = 16, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0733: {= wlidPer2 = 16, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0527: {= wlidPer2 = 16, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0407: {= wlidPer2 = 16, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.023: {= wlidPer2 = 16, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0202: {= wlidPer2 = 16, currN = 1, tankFlag = 1 =}; 
+            l()
+         }
+      :: when(wlid2 == 11 && sink == 0 && tankFlag == 2 && currN == 0) palt {
+         :0.1432: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1436: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0205: {= wlidPer2 = 10, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0249: {= wlidPer2 = 11, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0368: {= wlidPer2 = 11, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0535: {= wlidPer2 = 11, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0764: {= wlidPer2 = 11, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0952: {= wlidPer2 = 11, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1028: {= wlidPer2 = 11, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0932: {= wlidPer2 = 12, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0733: {= wlidPer2 = 12, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0527: {= wlidPer2 = 12, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0407: {= wlidPer2 = 12, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.023: {= wlidPer2 = 12, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0202: {= wlidPer2 = 12, currN = 1, tankFlag = 1 =}; 
+            l()
+         }
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 1 && timesteps < 25 && wlid1 == 17) {= sink = 1 =};
+         l()
+      :: when(tankFlag == 1 && currN == 2 && sink == 0 && contAction1G == 0 && timesteps < 25 && wlid1 == 3) {= wlid1 = 2, tankFlag = 2 =};
+         l()
+      :: when(wlid2 == 13 && sink == 0 && tankFlag == 2 && currN == 0) palt {
+         :0.1432: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1436: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0205: {= wlidPer2 = 12, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0249: {= wlidPer2 = 13, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0368: {= wlidPer2 = 13, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0535: {= wlidPer2 = 13, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0764: {= wlidPer2 = 13, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0952: {= wlidPer2 = 13, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1028: {= wlidPer2 = 13, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0932: {= wlidPer2 = 14, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0733: {= wlidPer2 = 14, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0527: {= wlidPer2 = 14, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0407: {= wlidPer2 = 14, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.023: {= wlidPer2 = 14, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0202: {= wlidPer2 = 14, currN = 1, tankFlag = 1 =}; 
+            l()
+         }
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 1 && timesteps < 25 && wlid2 == 1) {= wlid2 = 2, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(wlid2 == 3 && sink == 0 && tankFlag == 2 && currN == 0) palt {
+         :0.1432: {= wlidPer2 = 0, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1436: {= wlidPer2 = 18, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0205: {= wlidPer2 = 2, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0249: {= wlidPer2 = 3, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0368: {= wlidPer2 = 3, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0535: {= wlidPer2 = 3, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0764: {= wlidPer2 = 3, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0952: {= wlidPer2 = 3, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.1028: {= wlidPer2 = 3, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0932: {= wlidPer2 = 4, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0733: {= wlidPer2 = 4, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0527: {= wlidPer2 = 4, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0407: {= wlidPer2 = 4, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.023: {= wlidPer2 = 4, currN = 1, tankFlag = 1 =}; 
+            l()
+         :0.0202: {= wlidPer2 = 4, currN = 1, tankFlag = 1 =}; 
+            l()
+         }
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 1 && timesteps < 25 && wlid2 == 4) {= wlid2 = 5, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 1 && timesteps < 25 && wlid2 == 5) {= wlid2 = 6, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 1 && timesteps < 25 && wlid2 == 6) {= wlid2 = 7, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 1 && timesteps < 25 && wlid2 == 7) {= wlid2 = 8, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 0 && timesteps < 25 && wlid2 == 8) {= wlid2 = 7, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 0 && timesteps < 25 && wlid2 == 9) {= wlid2 = 8, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 0 && timesteps < 25 && wlid2 == 10) {= wlid2 = 10, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 0 && timesteps < 25 && wlid2 == 11) {= wlid2 = 11, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 0 && timesteps < 25 && wlid2 == 12) {= wlid2 = 12, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 0 && timesteps < 25 && wlid2 == 13) {= wlid2 = 13, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 0 && timesteps < 25 && wlid2 == 14) {= wlid2 = 14, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 0 && timesteps < 25 && wlid2 == 15) {= wlid2 = 15, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 0 && timesteps < 25 && wlid2 == 16) {= wlid2 = 16, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 0 && timesteps < 25 && wlid2 == 17) {= wlid2 = 17, currN = 0, tankFlag = 1, timesteps = timesteps + 1 =};
+         l()
+      :: when(tankFlag == 2 && currN == 2 && sink == 0 && contAction2G == 0 && timesteps < 25 && wlid2 == 18) {= sink = 1 =};
+         l()
+      }
+   }
+
+   l()
+}
+
+par {
+  } {
+:: PRISMLattice()
+}

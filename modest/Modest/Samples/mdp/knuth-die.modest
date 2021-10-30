@@ -1,0 +1,28 @@
+﻿// Modest DTMC model of Knuth's algorithm to simulate a die using only fair coins
+// mcsta knuth-die.modest
+// modes knuth-die.modest -M MDP
+int(0..6) value;
+
+property Term = Pmin(<> (value != 0)) == 1;
+property P1   = Pmax(<> (value == 1));
+property P2   = Pmax(<> (value == 2));
+property P3   = Pmax(<> (value == 3));
+property P4   = Pmax(<> (value == 4));
+property P5   = Pmax(<> (value == 5));
+property P6   = Pmax(<> (value == 6));
+
+process SimulatedDie(int(0..6) state)
+{
+	when(value == 0) alt {
+	::	when(state == 0) palt { :1: {= state = 1 =}  :1: {= state = 2 =} }
+	::	when(state == 1) palt { :1: {= state = 3 =}  :1: {= state = 4 =} }
+	::	when(state == 2) palt { :1: {= state = 5 =}  :1: {= state = 6 =} }
+	::	when(state == 3) palt { :1: {= state = 1 =}  :1: {= value = 1 =} }
+	::	when(state == 4) palt { :1: {= value = 2 =}  :1: {= value = 3 =} }
+	::	when(state == 5) palt { :1: {= value = 4 =}  :1: {= value = 5 =} }
+	::	when(state == 6) palt { :1: {= state = 2 =}  :1: {= value = 6 =} }
+	};
+	SimulatedDie(state)
+}
+
+SimulatedDie(0)

@@ -1,0 +1,54 @@
+﻿// Modest SHA model of a water level control system [HHHK13]
+// prohver.exe waterlevel.modest -E "TIME_BOUND=20, Normal={[-2,2],(-infty,-1.9],[1.9,infty)}"
+action on, off;
+
+const real INIT_FILL = 6.5;
+const real WAIT_TIME = 1;
+const real REACT_TIME = 0.1;
+const real OFF_FLOW = 1;
+const real ON_FLOW = -2;
+const real MAX_S = 8;
+const real MIN_S = 5;
+const real MAX_U = 12;
+const real MIN_U = 1;
+
+var level = INIT_FILL;
+
+const real TIME_BOUND;
+property P_Unsafe = Pmax(<>[T<=TIME_BOUND] (level > MAX_U || level < MIN_U));
+
+process Tank()
+{
+	process Off()
+	{
+		invariant(der(level) == OFF_FLOW)
+		alt { :: on; On() :: off; Off() }
+	}
+
+	process On()
+	{
+		invariant(der(level) == ON_FLOW)
+		alt { :: off; Off() :: on; On() }
+	}
+	
+	Off()
+}
+
+process Controller()
+{
+	var measurement; der(measurement) = 0;
+	
+	do {
+		::	delay(WAIT_TIME) {= measurement = Normal(level, 1) =};
+			delay(REACT_TIME) alt {
+				::	when(measurement <= MIN_S) off
+				::	when(measurement >= MAX_S) on
+				::	when(measurement < MAX_S && measurement > MIN_S) tau
+			}
+	}
+}
+
+par {
+	::	Tank()
+	::	Controller()
+}
