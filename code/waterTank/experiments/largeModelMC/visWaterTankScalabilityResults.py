@@ -36,13 +36,13 @@ def main():
 
     init_wls = np.load(RESULTS_FOLDER_BASELINE + "/initwls.npy")
 
-    print(run_times_untrimmed)
-    print(run_times_trimmed)
+    # print(run_times_untrimmed)
+    # print(run_times_trimmed)
 
     # print(safety_probs_untrimmed)
     # print(safety_probs_trimmed)
     
-    print(np.amax(run_times_untrimmed))
+    # print(np.amax(run_times_untrimmed))
 
     X,Y = np.meshgrid(init_wls,init_wls)
 
@@ -56,8 +56,8 @@ def main():
     plt.xlabel('Initial Tank 1 Water Level',fontsize=12)
     plt.ylabel('Initial Tank 2 Water Level',fontsize=12)
     ax.set_zlabel('Safety Probability',fontsize=12)
-    # plt.savefig(IMAGES_FOLDER + '/safetyProbsPlotWithNeg.png')
-    plt.show()
+    plt.savefig(IMAGES_FOLDER + '/safetyProbsPlotWithNeg.png')
+    # plt.show()
     plt.clf()
 
     ## plot runtimes
@@ -69,8 +69,8 @@ def main():
     plt.xlabel('Initial Tank 1 Water Level',fontsize=12)
     plt.ylabel('Initial Tank 2 Water Level',fontsize=12)
     ax2.set_zlabel('Runtime (log(s))',fontsize=12)
-    # plt.savefig(IMAGES_FOLDER + '/runTimesPlotWithNeg.png')
-    plt.show()
+    plt.savefig(IMAGES_FOLDER + '/runTimesPlotWithNeg.png')
+    # plt.show()
     plt.clf()
 
 

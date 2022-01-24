@@ -43,8 +43,21 @@ def main():
     # run_times_neg_trimmed = np.load(RESULTS_FOLDER_NEG_TRIMMED_BASELINE + "runtimesAEBSTrimmedBaselineMCNegMoS.npy")
     # safety_probs_neg_trimmed = np.load(RESULTS_FOLDER_NEG_TRIMMED_BASELINE + "safetyProbsAEBSTrimmedBaselineMCNegMoS.npy")
 
-    print(safety_probs_untrimmed)
-    print(safety_probs_trimmed)
+
+    # print("Water Tank: Untrimmed model run times")
+    # print(run_times_untrimmed)
+    # print("Water Tank: Untrimmed model safety probabilities")
+    # print(safety_probs_untrimmed)
+
+    # print("Water Tank: Trimmed model run times")
+    # print(run_times_trimmed)
+    # print("Water Tank: Trimmed model safety probabilities")
+    # print(safety_probs_trimmed)
+
+
+
+    # print(safety_probs_untrimmed)
+    # print(safety_probs_trimmed)
 
     sch_counts_baseline = np.load(RESULTS_FOLDER_BASELINE + "/schCounts.npy")
     sch_counts_trimmed = np.load(RESULTS_FOLDER_TRIMMED_BASELINE + "/schCounts.npy")
@@ -56,18 +69,18 @@ def main():
     plt.xlabel('Schedulers Per LSS',fontsize=12)
     plt.ylabel('Average Safety Probability',fontsize=12)
     plt.savefig(IMAGES_FOLDER + '/safetyProbsPlot.png')
-    plt.show()
+    # plt.show()
     plt.clf()
 
 
 
-    plt.plot(sch_counts_baseline,safety_probs_untrimmed_var,color='green')
-    plt.plot(sch_counts_trimmed,safety_probs_trimmed_var,color='red')
-    plt.xlabel('Schedulers Per LSS',fontsize=12)
-    plt.ylabel('Safety Probability Variance',fontsize=12)
-    plt.savefig(IMAGES_FOLDER + '/safetyProbsVarPlot.png')
-    plt.show()
-    plt.clf()
+    # plt.plot(sch_counts_baseline,safety_probs_untrimmed_var,color='green')
+    # plt.plot(sch_counts_trimmed,safety_probs_trimmed_var,color='red')
+    # plt.xlabel('Schedulers Per LSS',fontsize=12)
+    # plt.ylabel('Safety Probability Variance',fontsize=12)
+    # plt.savefig(IMAGES_FOLDER + '/safetyProbsVarPlot.png')
+    # # plt.show()
+    # plt.clf()
 
 
 
@@ -76,7 +89,7 @@ def main():
     plt.xlabel('Schedulers Per LSS',fontsize=12)
     plt.ylabel('Average Run Time',fontsize=12)
     plt.savefig(IMAGES_FOLDER + '/runTimesPlot.png')
-    plt.show()
+    # plt.show()
     plt.clf()
 
 

@@ -50,8 +50,9 @@ def main():
     ax.set_xlim([10,2000])
     plt.xlabel('Run time (s)',fontsize=20)
     plt.ylabel('Safety Probability',fontsize=20)
-    # plt.savefig(IMAGES_FOLDER + '/waterTankDiffWLsPlot.png')
-    plt.show()
+    plt.savefig(IMAGES_FOLDER + '/waterTankDiffWLsPlot.png')
+    # plt.show()
+    plt.clf()
 
 
 
