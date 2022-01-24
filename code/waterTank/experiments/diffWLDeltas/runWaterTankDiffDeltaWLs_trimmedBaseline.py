@@ -41,8 +41,8 @@ def main():
     init_wl1 = 50
     init_wl2 = 50
 
-    # deltawls = [4,5,6,7,8,9,10]
-    deltawls = 10
+    deltawls = [4,5,6,7,8,9,10]
+    # deltawls = 10
 
     init_prev_cont_action = 0
 

@@ -69,7 +69,7 @@ def main():
 
                 ## call modest
                 start_time = time.time()
-                proc = subprocess.run([MODEST_PATH, 'simulate',MODEL_FILE,'--lss','Sequential','-L','10','-C','0.8','-W','0.05','-E',"wlidInit1=" + str(init_wlid1) + ",wlidInit2=" + str(init_wlid2) + ",initContAction1=0,initContAction2=0"], stdout=PIPE, stderr=PIPE)
+                proc = subprocess.run([MODEST_PATH, 'simulate',MODEL_FILE,'--lss','Sequential','-L','10','-C','0.8','-W','0.05','-E',"wlidInit1=" + str(init_wlid1) + ",wlidInit2=" + str(init_wlid2) + ",initContAction1=0,initContAction2=0",'-J','40'], stdout=PIPE, stderr=PIPE)
                 duration = time.time() - start_time
                 if proc.returncode == 0:
                     crash_chance = parseMODESTOutput(proc.stdout)
