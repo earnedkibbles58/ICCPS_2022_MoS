@@ -60,39 +60,39 @@ def main():
     print("Trimmed 1 Sch")
     print(safety_probs_trimmed_few_average)
     print(run_times_trimmed_few_average)
-    # init_wls = np.load(RESULTS_FOLDER_BASELINE + "/initwls.npy")
-    # X,Y = np.meshgrid(init_wls,init_wls)
+    init_wls = np.load(RESULTS_FOLDER_BASELINE + "/initwls.npy")
+    X,Y = np.meshgrid(init_wls,init_wls)
 
 
-    # ## plot safety chances
-    # ax = plt.axes(projection='3d')
-    # ax.scatter3D(Y, X, safety_probs_untrimmed_average, color='green')
-    # ax.scatter3D(Y, X, safety_probs_trimmed_average, color='red')
-    # ax.scatter3D(Y, X, safety_probs_trimmed_few_average, color='orange')
-    # # ax.scatter3D(Y, X, safety_probs_neg_trimmed, color='blue')
+    ## plot safety chances
+    ax = plt.axes(projection='3d')
+    ax.scatter3D(Y, X, safety_probs_untrimmed_average, color='green')
+    ax.scatter3D(Y, X, safety_probs_trimmed_average, color='red')
+    ax.scatter3D(Y, X, safety_probs_trimmed_few_average, color='orange')
+    # ax.scatter3D(Y, X, safety_probs_neg_trimmed, color='blue')
 
-    # plt.xlabel('Initial Tank 1 Water Level',fontsize=12)
-    # plt.ylabel('Initial Tank 2 Water Level',fontsize=12)
-    # ax.set_zlabel('Safety Probability',fontsize=12)
-    # # plt.savefig(IMAGES_FOLDER + '/safetyProbsPlot_withFew.png')
-    # plt.show()
-    # plt.clf()
+    plt.xlabel('Initial Tank 1 Water Level',fontsize=12)
+    plt.ylabel('Initial Tank 2 Water Level',fontsize=12)
+    ax.set_zlabel('Safety Probability',fontsize=12)
+    # plt.savefig(IMAGES_FOLDER + '/safetyProbsPlot_withFew.png')
+    plt.show()
+    plt.clf()
 
-    # ## plot runtimes
-    # ax2 = plt.axes(projection='3d')
-    # ax2.scatter3D(Y, X, np.log10(run_times_untrimmed_average), color='green')
-    # ax2.scatter3D(Y, X, np.log10(run_times_trimmed_average), color='red')
-    # ax2.scatter3D(Y, X, np.log10(run_times_trimmed_few_average), color='orange')
+    ## plot runtimes
+    ax2 = plt.axes(projection='3d')
+    ax2.scatter3D(Y, X, np.log10(run_times_untrimmed_average), color='green')
+    ax2.scatter3D(Y, X, np.log10(run_times_trimmed_average), color='red')
+    ax2.scatter3D(Y, X, np.log10(run_times_trimmed_few_average), color='orange')
 
-    # plt.xlabel('Initial Tank 1 Water Level',fontsize=12)
-    # plt.ylabel('Initial Tank 2 Water Level',fontsize=12)
-    # ax2.set_zlabel('Runtime (log(s))',fontsize=12)
-    # # plt.savefig(IMAGES_FOLDER + '/runTimesPlot_withFew.png')
-    # plt.show()
-    # plt.clf()
+    plt.xlabel('Initial Tank 1 Water Level',fontsize=12)
+    plt.ylabel('Initial Tank 2 Water Level',fontsize=12)
+    ax2.set_zlabel('Runtime (log(s))',fontsize=12)
+    # plt.savefig(IMAGES_FOLDER + '/runTimesPlot_withFew.png')
+    plt.show()
+    plt.clf()
 
 
-    # ## plot safety chances
+    # ## plot safety chances variance
     # ax = plt.axes(projection='3d')
     # ax.scatter3D(Y, X, safety_probs_untrimmed_var, color='green')
     # ax.scatter3D(Y, X, safety_probs_trimmed_var, color='red')

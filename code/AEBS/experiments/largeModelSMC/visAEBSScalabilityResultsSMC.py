@@ -45,17 +45,25 @@ def main():
     # run_times_neg_trimmed = np.load(RESULTS_FOLDER_NEG_TRIMMED_BASELINE + "runtimesAEBSTrimmedBaselineMCNegMoS.npy")
     # safety_probs_neg_trimmed = np.load(RESULTS_FOLDER_NEG_TRIMMED_BASELINE + "safetyProbsAEBSTrimmedBaselineMCNegMoS.npy")
 
+    print("Results Pattern")
+    print([["(130,14)","(130,18)"],["(160,14)","(160,18)"]])
 
     print("Untrimmed 10 Sch")
+    print("Safety Probabilities")
     print(safety_probs_untrimmed_average)
+    print("Runtimes")
     print(run_times_untrimmed_average)
 
     print("Trimmed 10 Sch")
+    print("Safety Probabilities")
     print(safety_probs_trimmed_average)
+    print("Runtimes")
     print(run_times_trimmed_average)
 
     print("Trimmed 1 Sch")
+    print("Safety Probabilities")
     print(safety_probs_trimmed_few_average)
+    print("Runtimes")
     print(run_times_trimmed_few_average)
     
     # init_dists = np.load(RESULTS_FOLDER_BASELINE + "/initDists.npy")
