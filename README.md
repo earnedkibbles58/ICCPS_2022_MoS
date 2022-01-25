@@ -43,7 +43,7 @@ Figure 3:
 cd /ICCPS_2022_MoS-repeatabilityPackage/code/AEBS/experiments/largeModelMC/
 python3 runAEBSScalabilityMC_baseline.py (7 mins)
 python3 runAEBSScalabilityMC_trimmedBaseline.py (3 mins)
-python3 runAEBSScalabilityMC_trimmedBaseline_negMoS.py (9 mins)
+python3 runAEBSScalabilityMC_trimmedBaseline_negMoS.py (6 mins)
 python3 visAEBSScalabilityResults.py
 
 The two plots that get saved are
