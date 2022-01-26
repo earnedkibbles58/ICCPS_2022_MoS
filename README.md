@@ -4,10 +4,9 @@
 This repo contains the code for reproducing the experiments for the ICCPS 2022 paper "Monotonic Safety for
 Scalable and Data-Efficient Probabilistic Safety Analysis"
 
-# Dependencies and Requirements
-This package requires docker, linux screen (or mac/windows equivalent) and a machine with an x86 processor and 16Gb of RAM.
+Dependencies and Requirements: This package requires docker, linux screen (or mac/windows equivalent) and a machine with an x86 processor and 16Gb of RAM.
 
-The first step to reproduce the experiments is to obtain the docker image from ADD DOCKER LINK HERE!!!!!
+The first step to reproduce the experiments is to obtain the docker rar file provided in the REP.
 
 
 The experiments have 3 components to them:
@@ -20,8 +19,7 @@ The experiments have 3 components to them:
 Caveats: 
 1) Figures 3, 5, and 6 all use 3-d plots. To get as good of a 2-d view of these 3-d plots, we didn't save the figure directly in the script. Instead, we visualized the 3-d plot in an interactive pyplot figure window and then manually found the best view. Due to the use of docker, this is not possible in this package. So the viewpoints of figures 3, 5, and 6 from the paper will be different than those generated as a part of the repeatability pacakge.
 2) Due to differences in computing power, the absolute runtimes of the PRISM and Modest model checking tools will be different. However, the rleative runtimes should be similar (i.e. the untrimmed models should take longer to run than the trimmed models and the ratios of these runtimes should be close to those of the results reported in the paper).
-3) The Modest tool (used for table 1, table 2 and figure 6) ilikes to use as many cpus as possible while performing statistical model checking. To limit the number of cores it uses, see the '-J','2' parameter in the python3 scripts, which tells the tool to only use at most 2 cores. For example, to limit Modest to only using 1 core replace '2' with '1'. Note that this will increase the runtime of the code.
-4) We formatted the figure windows for figures 2 and 4, so the saved figures will have different spacing than those in the paper.
+3) We formatted the figure windows for figures 2 and 4, so the saved figures will have different spacing than those in the paper.
 
 
 # Reproducability Instructions
