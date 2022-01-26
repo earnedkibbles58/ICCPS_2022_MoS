@@ -119,5 +119,5 @@ python3 checkStrongMoSAssn.py (3 hours)
 ```
 The results will be printed in */ICCPS_2022_MoS-repeatabilityPackage/results/waterTank/testIndivSchOneTank/if5.5_of2.1_deltawl5_numSteps10_wlmax26/checkStrongMoSAssn.txt*
 
-The 'next state:' line of the file indicates the state pair being compared ([wl1 wl2]) and the 'Prob MoS Holds over sch:' gives the proportion of schedulers over which MoS holds for that state pair. To see what this file should contain after running the experiment, see the file contents before running checkStrongMoSAssn.py
+The 'next state:' line of the file indicates the state pair being compared ([wl1 wl2]) and the 'Prob MoS Holds over sch:' gives the proportion of schedulers over which MoS holds for that state pair. To see what this file should contain after running the experiment, see */ICCPS_2022_MoS-repeatabilityPackage/results/waterTank/testIndivSchOneTank/if5.5_of2.1_deltawl5_numSteps10_wlmax26/checkStrongMoSAssn_orig.txt*
 
