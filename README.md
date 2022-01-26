@@ -100,9 +100,10 @@ The two plots at get saved are
 */ICCPS_2022_MoS-repeatabilityPackage/results/waterTank/largeModel_SMC/plots/if13.5_of4.3_deltawl5_numSteps10/safetyProbsPlot_withFew.png*
 
 Section 6.4 text:
+This section takes several days to generate, since it requires running an instance of model checking for every scheduler of the model across 17 pairs of initial conditions. In lieu of running the code for all of the 17 state pairs, one could run the code for less time (only computing say 5 state pair initial conditions) and check that those results match. The results are saved as they get produced so it is fine to stop the code after the first few pairs are computed. 
 ```
 cd /ICCPS_2022_MoS-repeatabilityPackage/code/AEBS/experiments/testIndivSch/
-python3 checkStrongMoSAssn.py (FIGURE OUT THIS RUNTIME. It will be painfully long...)
+python3 checkStrongMoSAssn.py (4/5 days)
 ```
 The results will be printed in 
 */ICCPS_2022_MoS-repeatabilityPackage/results/AEBS/testIndivSch/H3L3/N_1/dist_9_vel_1.2_deltad_1_deltav_0.4/checkStrongMoSAssn.txt*
