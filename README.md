@@ -127,9 +127,16 @@ The results will be printed in */ICCPS_2022_MoS-repeatabilityPackage/results/wat
 The 'next state:' line of the file indicates the state pair being compared ([wl1 wl2]) and the 'Prob MoS Holds over sch:' gives the proportion of schedulers over which MoS holds for that state pair. To see what this file should contain after running the experiment, see */ICCPS_2022_MoS-repeatabilityPackage/results/waterTank/testIndivSchOneTank/if5.5_of2.1_deltawl5_numSteps10_wlmax26/checkStrongMoSAssn_orig.txt*
 
 
-The figures and tables and files are contained in the docker container. To extract them to one's own machine exit the docker and copy the */ICCPS_2022_MoS-repeatabilityPackage/results* from the container to one's own file system.
+The figures and tables and files are contained in the docker container. To extract them to one's own machine exit the docker and copy the */ICCPS_2022_MoS-repeatabilityPackage/results* from the container to one's own file system and examine the figures.
 
 ```
 exit
 docker cp iccps_2022_container:/ICCPS_2022_MoS-repeatabilityPackage/results .
 ```
+
+Finally, remove the docker
+
+```
+docker rm iccps_2022_container
+```
+
