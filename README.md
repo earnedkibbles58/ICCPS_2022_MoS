@@ -38,7 +38,7 @@ This should result in a command line within the docker. While some of the longer
 screen -r iccps_2022mos
 ```
 
-We have divided the instructions for the reproducability package by each figure/table. The parentheses indicate the expected runtime of each script. The visualization scripts all have negligible runtimes.
+We have divided the instructions for the reproducability package by each figure/table.
 
 Figure 2: Expected runtime 3 mins.
 
