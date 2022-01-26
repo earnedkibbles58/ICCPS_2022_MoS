@@ -104,7 +104,7 @@ The two plots at get saved are
 
 Section 6.4.1 text: Expected runtime 5 days.
 
-This section takes several days to generate, since it requires running an instance of model checking for every scheduler of the model across 17 pairs of initial conditions. The script runs the state pairs sequentially, saving the results as it goes. In lieu of running the code for all of the 17 state pairs, one could run the code for less time, interrupt the srcipt by pressing ctrl-C, and check that those results match what is reported in the paper. 
+This section takes several days to generate, since it requires running an instance of model checking for every scheduler of the model across 17 pairs of initial conditions. The script runs the state pairs sequentially, saving the results as it goes. In lieu of running the code for all of the 17 state pairs, one could run the code for less time, interrupt the srcipt by pressing ctrl-C, and check that the partial results match what is reported in the paper. 
 ```
 cd /ICCPS_2022_MoS-repeatabilityPackage
 ./genSection64.sh
