@@ -1,0 +1,15 @@
+next state: [1 2]
+Prob MoS Holds over schs: 1.0
+s1-s2 running sum: 381.8441939126726
+next state: [2 3]
+Prob MoS Holds over schs: 0.9375
+s1-s2 running sum: 168.85033768633704
+next state: [3 4]
+Prob MoS Holds over schs: 0.8125
+s1-s2 running sum: 58.657059608965845
+next state: [5 4]
+Prob MoS Holds over schs: 0.880859375
+s1-s2 running sum: 39.595596765839566
+next state: [6 5]
+Prob MoS Holds over schs: 1.0
+s1-s2 running sum: 370.8089963790798

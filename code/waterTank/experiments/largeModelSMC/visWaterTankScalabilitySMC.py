@@ -74,8 +74,8 @@ def main():
     plt.xlabel('Initial Tank 1 Water Level',fontsize=12)
     plt.ylabel('Initial Tank 2 Water Level',fontsize=12)
     ax.set_zlabel('Safety Probability',fontsize=12)
-    # plt.savefig(IMAGES_FOLDER + '/safetyProbsPlot_withFew.png')
-    plt.show()
+    plt.savefig(IMAGES_FOLDER + '/safetyProbsPlot_withFew.png')
+    # plt.show()
     plt.clf()
 
     ## plot runtimes
@@ -87,8 +87,8 @@ def main():
     plt.xlabel('Initial Tank 1 Water Level',fontsize=12)
     plt.ylabel('Initial Tank 2 Water Level',fontsize=12)
     ax2.set_zlabel('Runtime (log(s))',fontsize=12)
-    # plt.savefig(IMAGES_FOLDER + '/runTimesPlot_withFew.png')
-    plt.show()
+    plt.savefig(IMAGES_FOLDER + '/runTimesPlot_withFew.png')
+    # plt.show()
     plt.clf()
 
 
