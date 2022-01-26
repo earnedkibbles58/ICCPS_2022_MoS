@@ -131,7 +131,7 @@ The figures and tables and files are contained in the docker container. To extra
 
 ```
 exit
-docker cp iccps_2022_container:/ICCPS_2022_MoS-repeatabilityPackage/results .
+docker cp iccps_2022_container:/ICCPS_2022_MoS-repeatabilityPackage .
 ```
 
 Finally, remove the docker
@@ -140,3 +140,13 @@ Finally, remove the docker
 docker rm iccps_2022_container
 ```
 
+
+The figures and tables can be found at
+- Figure 2: *ICCPS_2022_MoS-repeatabilityPackage/results/AEBS/diffDeltaDs_MC/plots/AEBSDiffDeltaDsPlot.png*
+- Figure 3: *ICCPS_2022_MoS-repeatabilityPackage/results/AEBS/largeModel_MC/plots/runTimesPlotWithNeg.png* and *ICCPS_2022_MoS-repeatabilityPackage/results/AEBS/largeModel_MC/plots/safetyProbsPlotWithNeg.png*
+- Figure 4: *ICCPS_2022_MoS-repeatabilityPackage/results/waterTank/diffWLDeltas/plots/if13.5_of4.3_numSteps10/waterTankDiffWLsPlot.png*
+- Figure 5: *ICCPS_2022_MoS-repeatabilityPackage/results/waterTank/largeModel_MC/plots/if13.5_of4.3_deltawl5_numSteps10/runTimesPlotWithNeg.png* and *ICCPS_2022_MoS-repeatabilityPackage/results/waterTank/largeModel_MC/plots/if13.5_of4.3_deltawl5_numSteps10/safetyProbsPlotWithNeg.png*
+- Tables 1 and 2: *ICCPS_2022_MoS-repeatabilityPackage/code/AEBS/experiments/largeModelSMC/tempOutput.txt*
+- Figure 6: *ICCPS_2022_MoS-repeatabilityPackage/results/waterTank/largeModel_SMC/plots/if13.5_of4.3_deltawl5_numSteps10/runTimesPlot_withFew.png* and *ICCPS_2022_MoS-repeatabilityPackage/results/waterTank/largeModel_SMC/plots/if13.5_of4.3_deltawl5_numSteps10/safetyProbsPlot_withFew.png*
+- Section 6.4.1: *ICCPS_2022_MoS-repeatabilityPackage/results/AEBS/testIndivSch/H3L3/N_1/dist_9_vel_1.2_deltad_1_deltav_0.4/checkStrongMoSAssn.txt*
+- Table 3: *ICCPS_2022_MoS-repeatabilityPackage/results/waterTank/testIndivSchOneTank/if5.5_of2.1_deltawl5_numSteps10_wlmax26/checkStrongMoSAssn.txt*
