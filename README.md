@@ -28,12 +28,12 @@ ADD IN RUNTIME OF AEBS MOS ASSUMPTION!!!!!!
 We have divided the instructions for the reproducability package by each figure/table. The parentheses indicate the expected runtime of each script. The visualization scripts all have negligible runtimes.
 
 Figure 2:
-
-`cd /ICCPS_2022_MoS-repeatabilityPackage/code/AEBS/experiments/diffDeltaDs
+```
+cd /ICCPS_2022_MoS-repeatabilityPackage/code/AEBS/experiments/diffDeltaDs
 python3 runAEBSDiffDeltaDs_baseline.py (2 mins)
 python3 runAEBSDiffDeltaDs_trimmedbaseline.py (30 seconds)
 python3 visAEBSDiffDeltaDsResults.py
-`
+```
 
 The one plot that gets saved is
 */ICCPS_2022_MoS-repeatabilityPackage/results/AEBS/diffDeltaDs_MC/plots/AEBSDiffDeltaDsPlot.png*
