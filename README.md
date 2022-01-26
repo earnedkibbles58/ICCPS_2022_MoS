@@ -24,10 +24,10 @@ Caveats:
 
 # Reproducability Instructions
 
-The first step is to get the docker setup. Due to the long runtimes of some of the reproducability scripts, it is recommended to utilize the linux screen function to allow the scripts to run in the background. Navigate to the same directory as the iccps2022mos.tar object provided and run
+The first step is to get the docker setup. Due to the long runtimes of some of the reproducability scripts, it is recommended to utilize the linux screen function to allow the scripts to run in the background. Navigate to the same directory as the Dockerfile provided and run:
 
 ```
-docker load -i iccps2022mos.tar
+docker build . -t iccps_2022mos:latest
 screen -S iccps_2022mos
 run --name iccps_2022mos_container -it iccps_2022mos:latest
 ```
