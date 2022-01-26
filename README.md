@@ -5,7 +5,7 @@ This repo contains the code for reproducing the experiments for the ICCPS 2022 p
 Scalable and Data-Efficient Probabilistic Safety Analysis"
 
 Dependencies and Requirements
-This package requires docker and a machine with an x86 processor and 16Gb of RAM.
+This package requires docker, linux screen (or mac/windows equivalent) and a machine with an x86 processor and 16Gb of RAM.
 
 The first step to reproduce the experiments is to obtain the docker image from ADD DOCKER LINK HERE!!!!!
 
@@ -26,14 +26,19 @@ Caveats:
 
 # Reproducability Instructions
 
-The first step is to get the docker setup. Navigate to the same directory as the iccps2022mos.tar object provided and run
+The first step is to get the docker setup. Due to the long runtimes of some of the reproducability scripts, it is recommended to utilize the linux screen function to allow the scripts to run in the background. Navigate to the same directory as the iccps2022mos.tar object provided and run
 
 ```
 docker load -i iccps2022mos.tar
-run -it iccps_2022mos:latest
+screen -S iccps_2022mos
+run --name iccps_2022mos_container -it iccps_2022mos:latest
 ```
 
-This should result in a command line within the docker. 
+This should result in a command line within the docker. While some of the longer running scripts are running you can detatch the screen by pressing ctrl-A,ctrl-D and reattatch the screen by running
+
+```
+screen -r iccps_2022mos
+```
 
 We have divided the instructions for the reproducability package by each figure/table. The parentheses indicate the expected runtime of each script. The visualization scripts all have negligible runtimes.
 
@@ -123,3 +128,10 @@ The results will be printed in */ICCPS_2022_MoS-repeatabilityPackage/results/wat
 
 The 'next state:' line of the file indicates the state pair being compared ([wl1 wl2]) and the 'Prob MoS Holds over sch:' gives the proportion of schedulers over which MoS holds for that state pair. To see what this file should contain after running the experiment, see */ICCPS_2022_MoS-repeatabilityPackage/results/waterTank/testIndivSchOneTank/if5.5_of2.1_deltawl5_numSteps10_wlmax26/checkStrongMoSAssn_orig.txt*
 
+
+The figures and tables and files are contained in the docker container. To extract them to one's own machine exit the docker and copy the */ICCPS_2022_MoS-repeatabilityPackage/results* from the container to one's own file system.
+
+```
+exit
+docker cp iccps_2022_container:/ICCPS_2022_MoS-repeatabilityPackage/results .
+```
