@@ -27,83 +27,74 @@ Caveats:
 
 We have divided the instructions for the reproducability package by each figure/table. The parentheses indicate the expected runtime of each script. The visualization scripts all have negligible runtimes.
 
-Figure 2:
+Figure 2: Expected runtime 3 mins.
+
 ```
-cd /ICCPS_2022_MoS-repeatabilityPackage/code/AEBS/experiments/diffDeltaDs
-python3 runAEBSDiffDeltaDs_baseline.py (2 mins)
-python3 runAEBSDiffDeltaDs_trimmedbaseline.py (30 seconds)
-python3 visAEBSDiffDeltaDsResults.py
+cd /ICCPS_2022_MoS-repeatabilityPackage
+./genFigure2.sh
 ```
 
 The one plot that gets saved is
 */ICCPS_2022_MoS-repeatabilityPackage/results/AEBS/diffDeltaDs_MC/plots/AEBSDiffDeltaDsPlot.png*
 
 
-Figure 3:
+Figure 3: Expected runtime 16 mins.
+
 ```
-cd /ICCPS_2022_MoS-repeatabilityPackage/code/AEBS/experiments/largeModelMC/
-python3 runAEBSScalabilityMC_baseline.py (7 mins)
-python3 runAEBSScalabilityMC_trimmedBaseline.py (3 mins)
-python3 runAEBSScalabilityMC_trimmedBaseline_negMoS.py (6 mins)
-python3 visAEBSScalabilityResults.py
+cd /ICCPS_2022_MoS-repeatabilityPackage
+./genFigure3.sh
 ```
 The two plots that get saved are
 */ICCPS_2022_MoS-repeatabilityPackage/results/AEBS/largeModel_MC/plots/runTimesPlotWithNeg.png*
 */ICCPS_2022_MoS-repeatabilityPackage/results/AEBS/largeModel_MC/plots/safetyProbsPlotWithNeg.png*
 
-Figure 4:
+Figure 4: Expected runtime 45 mins.
+
 ```
-cd /ICCPS_2022_MoS-repeatabilityPackage/code/waterTank/experiments/diffWLDeltas/
-python3 runWaterTankDiffDeltaWLs_baseline.py (30 mins)
-python3 runWaterTankDiffDeltaWLs_trimmedBaseline.py (17 mins)
-python3 visWaterTankDiffDeltaWLs.py
+cd /ICCPS_2022_MoS-repeatabilityPackage
+./genFigure4.sh
 ```
 The one plot that get saved is
 */ICCPS_2022_MoS-repeatabilityPackage/results/waterTank/diffWLDeltas/plots/if13.5_of4.3_numSteps10/waterTankDiffWLsPlot.png*
 
 
-Figure 5:
+Figure 5: Expected runtime 19 hours.
+
 ```
-cd /ICCPS_2022_MoS-repeatabilityPackage/code/waterTank/experiments/largeModelMC/
-python3 runWaterTankScalabilityMC_baseline.py (18 hours)
-python3 runWaterTankScalabilityMC_trimmedbaseline.py (73 mins)
-python3 runWaterTankScalabilityMC_trimmedbaseline_negMoS.py (9 mins)
-python3 visWaterTankScalabilityResults.py
+cd /ICCPS_2022_MoS-repeatabilityPackage
+./genFigure5.sh
 ```
 The two plots that get saved are:
 */ICCPS_2022_MoS-repeatabilityPackage/results/waterTank/largeModel_MC/plots/if13.5_of4.3_deltawl5_numSteps10/runTimesPlotWithNeg.png*
 */ICCPS_2022_MoS-repeatabilityPackage/results/waterTank/largeModel_MC/plots/if13.5_of4.3_deltawl5_numSteps10/safetyProbsPlotWithNeg.png*
 
-Tables 1 and 2:
+Tables 1 and 2: Expected runtime 7 hours.
+
 These scripts run 10 times for each model and number of schedulers. If they are taking too long, feel free to lower that number by changing the iter_per_init variable in each of the runAEBSScalability*.py scripts. However, the results are random so it is recomended to run no fewer than 3 iterations. Because the results are random, the safety probabilities will not exactly match those reported in the paper, but they should be very similar.
 ```
-cd /ICCPS_2022_MoS-repeatabilityPackage/code/AEBS/experiments/largeModelSMC/
-python3 runAEBSScalabilitySMC_baseline.py (4.5 hours)
-python3 runAEBSScalabilitySMC_trimmedbaseline.py (2.5 hours)
-python3 runAEBSScalabilitySMCFewSchSamples_trimmedbaseline.py (10 mins)
-python3 visAEBSScalabilityResultsSMC.py > tempOutput.txt
+cd /ICCPS_2022_MoS-repeatabilityPackage
+./genTables1And2.sh
 ```
 The results will be saved to
 */ICCPS_2022_MoS-repeatabilityPackage/code/AEBS/experiments/largeModelSMC/tempOutput.txt*
 
-Figure 6:
+Figure 6: Expected runtime 21 mins.
+
 These experiments run 10 times for each model and number of schedulers. If they are taking too long, feel free to lower that number by changing the iter_per_init variable in each of the runAEBSScalability*.py scripts. However, the results are technically random so it is recomended to run no fewer than 3 iterations. Because the results are random, the safety probabilities will not exactly match those reported in the paper, but they should be very similar.
 ```
-cd /ICCPS_2022_MoS-repeatabilityPackage/code/waterTank/experiments/largeModelSMC/
-python3 runAEBSScalabilitySMC_baseline.py (9 mins)
-python3 runAEBSScalabilitySMC_trimmedbaseline.py (9 mins)
-python3 runAEBSScalabilitySMCFewSchSamples_trimmedbaseline.py (3 mins)
-python3 visAEBSScalabilityResultsSMC.py
+cd /ICCPS_2022_MoS-repeatabilityPackage
+./genFigure6.sh
 ```
 The two plots at get saved are
 */ICCPS_2022_MoS-repeatabilityPackage/results/waterTank/largeModel_SMC/plots/if13.5_of4.3_deltawl5_numSteps10/runTimesPlot_withFew.png*
 */ICCPS_2022_MoS-repeatabilityPackage/results/waterTank/largeModel_SMC/plots/if13.5_of4.3_deltawl5_numSteps10/safetyProbsPlot_withFew.png*
 
-Section 6.4 text:
+Section 6.4 text: Expected runtime 5 days.
+
 This section takes several days to generate, since it requires running an instance of model checking for every scheduler of the model across 17 pairs of initial conditions. The script runs the state pairs sequentially, saving the results as it goes. In lieu of running the code for all of the 17 state pairs, one could run the code for less time, interrupt the srcipt by pressing ctrl-C, and check that those results match what is reported in the paper. 
 ```
-cd /ICCPS_2022_MoS-repeatabilityPackage/code/AEBS/experiments/testIndivSch/
-python3 checkStrongMoSAssn.py (4/5 days)
+cd /ICCPS_2022_MoS-repeatabilityPackage
+./genSection64.sh
 ```
 The results will be printed in 
 */ICCPS_2022_MoS-repeatabilityPackage/results/AEBS/testIndivSch/H3L3/N_1/dist_9_vel_1.2_deltad_1_deltav_0.4/checkStrongMoSAssn.txt*
@@ -112,10 +103,11 @@ The 'next state:' line of the file indicates the state pairs being compared ([d1
 */ICCPS_2022_MoS-repeatabilityPackage/results/AEBS/testIndivSch/H3L3/N_1/dist_9_vel_1.2_deltad_1_deltav_0.4/fullStrongMoSAssn.txt*
 
 
-Table 3:
+Table 3: Expected runtime 3 hours.
+
 ```
-cd /ICCPS_2022_MoS-repeatabilityPackage/code/waterTank/experiments/testIndivSch/
-python3 checkStrongMoSAssn.py (3 hours)
+cd /ICCPS_2022_MoS-repeatabilityPackage
+./genTable3.sh
 ```
 The results will be printed in */ICCPS_2022_MoS-repeatabilityPackage/results/waterTank/testIndivSchOneTank/if5.5_of2.1_deltawl5_numSteps10_wlmax26/checkStrongMoSAssn.txt*
 
