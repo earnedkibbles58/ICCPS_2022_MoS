@@ -33,7 +33,8 @@ docker load -i iccps2022mos.tar
 run -it iccps_2022mos:latest
 ```
 
-This should result in a command line
+This should result in a command line within the docker. 
+
 We have divided the instructions for the reproducability package by each figure/table. The parentheses indicate the expected runtime of each script. The visualization scripts all have negligible runtimes.
 
 Figure 2: Expected runtime 3 mins.
