@@ -24,7 +24,16 @@ Caveats:
 4) We formatted the figure windows for figures 2 and 4, so the saved figures will have different spacing than those in the paper.
 
 
+# Reproducability Instructions
 
+The first step is to get the docker setup. Navigate to the same directory as the iccps2022mos.tar object provided and run
+
+```
+docker load -i iccps2022mos.tar
+run -it iccps_2022mos:latest
+```
+
+This should result in a command line
 We have divided the instructions for the reproducability package by each figure/table. The parentheses indicate the expected runtime of each script. The visualization scripts all have negligible runtimes.
 
 Figure 2: Expected runtime 3 mins.
