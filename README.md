@@ -4,7 +4,7 @@
 This repo contains the code for reproducing the experiments for the ICCPS 2022 paper "Monotonic Safety for
 Scalable and Data-Efficient Probabilistic Safety Analysis"
 
-Dependencies and Requirements
+#Dependencies and Requirements
 This package requires docker, linux screen (or mac/windows equivalent) and a machine with an x86 processor and 16Gb of RAM.
 
 The first step to reproduce the experiments is to obtain the docker image from ADD DOCKER LINK HERE!!!!!
