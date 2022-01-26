@@ -29,7 +29,7 @@ The first step is to get the docker setup. Due to the long runtimes of some of t
 ```
 docker build . -t iccps_2022mos:latest
 screen -S iccps_2022mos
-run --name iccps_2022mos_container -it iccps_2022mos:latest
+docker run --name iccps_2022mos_container -it iccps_2022mos:latest
 ```
 
 This should result in a command line within the docker. While some of the longer running scripts are running you can detatch the screen by pressing ctrl-A,ctrl-D and reattatch the screen by running
