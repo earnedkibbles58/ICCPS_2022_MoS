@@ -91,8 +91,6 @@ python3 checkStrongMoSAssn.py
 
 The results will be printed in /ICCPS_2022_MoS-repeatabilityPackage/results/AEBS/testIndivSch/H3L3/N_1/dist_9_vel_1.2_deltad_1_deltav_0.4/checkStrongMoSAssn.txt
 
-ADD PARAGRAPH EXPLAINING THE FORMAT OF THE RESULTS!!!!!!!
-
 Table 3:
 
 cd /ICCPS_2022_MoS-repeatabilityPackage/code/waterTank/experiments/testIndivSch/
@@ -100,4 +98,3 @@ python3 checkStrongMoSAssn.py
 
 The results will be printed in /ICCPS_2022_MoS-repeatabilityPackage/results/waterTank/testIndivSchOneTank/if5.5_of2.1_deltawl5_numSteps10_wlmax26/checkStrongMoSAssn.txt
 
-ADD PARAGRAPH EXPLAINING THE FORMAT OF THE RESULTS!!!!!!!
