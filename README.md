@@ -6,7 +6,7 @@ Scalable and Data-Efficient Probabilistic Safety Analysis"
 
 
 
-The first step to reproduce the experiments is to obtain the docker image from ADD DOCKER LINK HERE!!!!!
+The first step to reproduce the experiments is to obtain the docker image. Message the authors for that. 
 
 
 The experiments have 3 components to them:
